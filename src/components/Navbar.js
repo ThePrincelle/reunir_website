@@ -1,7 +1,22 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
-export default function NavBar() {
+import {
+	Link,
+	useLocation
+  } from "react-router-dom";
+
+export default function NavBar(props) {
+    let linkActive = "border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+
+	let linkActiveMobile = "bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+
+	let linkNotActive = "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+
+	let linkNotActiveMobile = "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+
+	let location = useLocation();
+
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({ open }) => (
@@ -19,7 +34,7 @@ export default function NavBar() {
 									)}
 								</Disclosure.Button>
 							</div>
-							<div className="flex-shrink-0 flex items-center">
+							<Link to="/" className="flex-shrink-0 flex items-center">
 								<img
 									className="block lg:hidden h-8 w-auto"
 									src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -30,33 +45,27 @@ export default function NavBar() {
 									src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
 									alt="Workflow"
 								/>
-							</div>
+							</Link>
 							<div className="hidden md:ml-6 md:flex md:space-x-8">
 								{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-								<a
-									href="#"
-									className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+								<Link
+									to="/"
+									className={location.pathname === "/" ? linkActive : linkNotActive}
 								>
-									Dashboard
-								</a>
-								<a
-									href="#"
-									className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+									Accueil
+								</Link>
+								<Link
+									to="/about"
+									className={location.pathname === "/about" ? linkActive : linkNotActive}
 								>
-									Team
-								</a>
-								<a
-									href="#"
-									className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+									About
+								</Link>
+								<Link
+									to="/users"
+									className={location.pathname === "/users" ? linkActive : linkNotActive}
 								>
-									Projects
-								</a>
-								<a
-									href="#"
-									className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-								>
-									Calendar
-								</a>
+									Users
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -64,30 +73,24 @@ export default function NavBar() {
 					<Disclosure.Panel className="md:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-							<a
-								href="#"
-								className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+							<Link
+								to="/"
+								className={location.pathname === "/" ? linkActiveMobile : linkNotActiveMobile}
 							>
-								Dashboard
-							</a>
-							<a
-								href="#"
-								className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+								Accueil
+							</Link>
+							<Link
+								to="/about"
+								className={location.pathname === "/about" ? linkActiveMobile : linkNotActiveMobile}
 							>
-								Team
-							</a>
-							<a
-								href="#"
-								className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+								About
+							</Link>
+							<Link
+								to="/users"
+								className={location.pathname === "/users" ? linkActiveMobile : linkNotActiveMobile}
 							>
-								Projects
-							</a>
-							<a
-								href="#"
-								className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
-							>
-								Calendar
-							</a>
+								Users
+							</Link>
 						</div>
 					</Disclosure.Panel>
 				</>

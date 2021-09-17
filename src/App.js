@@ -1,11 +1,56 @@
-import NavBar from './components/Navbar'
+import React, { useState, useCallback } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import NavBar from './components/NavBar'
 
 function App() {
-  return (
-    <div className="App">
-      <NavBar/>
-    </div>
-  );
+	let activePage, setActivePage = useState("home");
+
+	const wrapperSetActivePage = useCallback(val => {
+		setActivePage(val);
+	  }, [setActivePage]);
+
+	let routes = [
+		{
+			id: "home",
+			route: "/",
+			active: true
+		},
+		{
+			id: "about",
+			route: "/about",
+			active: false
+		},
+		{
+			id: "users",
+			route: "/users",
+			active: false
+		}
+	];
+
+	return (
+		<div className="App">
+			<Router>
+				<NavBar routes={routes} activePage={activePage} setActivePage={wrapperSetActivePage} />
+
+				<Switch>
+					<Route path="/about">
+						<p>About</p>
+					</Route>
+					<Route path="/users">
+						<p>Users</p>
+					</Route>
+					<Route path="/">
+						<p>Home</p>
+					</Route>
+				</Switch>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
