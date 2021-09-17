@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import NavBar from './components/NavBar.js'
+import NavBar from './components/Navbar'
 
 function App() {
 	let activePage, setActivePage = useState("home");
@@ -35,7 +35,7 @@ function App() {
 	return (
 		<div className="App">
 			<Router>
-				<NavBar routes={routes} activePage={activePage} setActivePage={wrapperSetActivePage} />
+				<Navbar routes={routes} activePage={activePage} setActivePage={wrapperSetActivePage} />
 
 				<Switch>
 					<Route path="/about">
