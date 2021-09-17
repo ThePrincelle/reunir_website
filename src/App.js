@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import NavBar from './components/Navbar'
+import Navbar from './components/Navbar'
 
 function App() {
 	let activePage, setActivePage = useState("home");
