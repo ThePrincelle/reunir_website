@@ -61,7 +61,7 @@ steps:
     key:
       from_secret: SSH_KEY
     recursive: true
-    source: ./dist/
+    source: ./build/
     target: ~/sites/clients/reunir/dev
     script:
       - echo "Done"
