@@ -2,14 +2,25 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import Intro from "../sections/home/Intro"
+import Intro from "../sections/home/Intro";
 
 export default function Home(props) {
 	return (
 		<div>
-			<main className="lg:relative">
-				<div className="mx-auto max-w-7xl w-full pt-16 pb-25 text-center lg:py-48 lg:text-left">
-					<div className="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
+			<div className="relative bg-indigo-800">
+				<div className="absolute inset-0">
+					<img
+						className="w-full h-full object-cover"
+						src="https://source.unsplash.com/random/2500x1200/?nature+psy+day+calm+talk+morning+walk+day&auto=format&fit=crop&w=1920&q=60"
+						alt=""
+					/>
+					<div
+						className="absolute inset-0 bg-white-900 mix-blend-multiply"
+						aria-hidden="true"
+					/>
+				</div>
+				<div className="relative max-w-6xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+				<div className="px-4 lg:w-1/2 sm:px-8 xl:pr-16 bg-white bg-opacity-90 pt-8 pb-2 rounded-xl">
 						<h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
 							<span className="block xl:inline">
                                 <span className="text-blue-700">Ré-Unir</span>
@@ -46,16 +57,9 @@ export default function Home(props) {
 						</div>
 					</div>
 				</div>
-				<div className="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
-					<img
-						className="absolute inset-0 w-full h-full object-cover"
-						src="https://source.unsplash.com/random/?nature+psy+day+calm+talk+morning+walk+day&auto=format&fit=crop&w=2102&q=80"
-						alt=""
-					/>
-				</div>
-			</main>
+			</div>
 
-            <Intro/>
+			<Intro />
 		</div>
 	);
 }
