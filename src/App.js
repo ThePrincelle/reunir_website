@@ -1,55 +1,79 @@
-import React, { useState, useCallback } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import * as React from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
+// Pages
+import Home from './pages/Home'
+import About from './pages/About'
+import Users from './pages/Users'
+
 
 function App() {
-	let activePage, setActivePage = useState("home");
-
-	const wrapperSetActivePage = useCallback(val => {
-		setActivePage(val);
-	  }, [setActivePage]);
-
-	let routes = [
+	const routes = [
 		{
 			id: "home",
-			route: "/",
-			active: true
+			navbar: true,
+			name: "Accueil",
+			path: "/",
+			exact: true,
+			component: Home
 		},
 		{
-			id: "about",
-			route: "/about",
-			active: false
+			id: "psychanalyse",
+			navbar: true,
+			name: "Psychanalyse",
+			path: "/psychanalyse",
+			exact: false,
+			component: About
 		},
 		{
-			id: "users",
-			route: "/users",
-			active: false
+			id: "services",
+			navbar: true,
+			name: "Services",
+			path: "/services",
+			exact: false,
+			component: Users
+		},
+		{
+			id: "psychamarche",
+			navbar: true,
+			name: "Psychamarche",
+			path: "/psychamarche",
+			exact: false,
+			component: Users
+		},
+		{
+			id: "contact",
+			navbar: true,
+			name: "Contact",
+			path: "/contact",
+			exact: false,
+			component: Users
 		}
 	];
 
 	return (
-		<div className="App">
-			<Router>
-				<Navbar routes={routes} activePage={activePage} setActivePage={wrapperSetActivePage} />
+		<Router>
+			<div>
+				<Navbar routes={routes} />
 
 				<Switch>
-					<Route path="/about">
-						<p>About</p>
+
+				{routes.map((route) => (
+					<Route key={route.id} path={route.path} exact={route.exact}>
+						<route.component />
 					</Route>
-					<Route path="/users">
-						<p>Users</p>
-					</Route>
-					<Route path="/">
-						<p>Home</p>
-					</Route>
+				))}
+
+				<Redirect to="/"/>
+
 				</Switch>
-			</Router>
-		</div>
+
+				<Footer routes={routes} />
+			</div>
+		</Router>
 	);
 }
 
