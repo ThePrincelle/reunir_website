@@ -6,7 +6,7 @@ import { getSingleton } from '../../cms'
 
 export default function Intro() {
 
-    let [loading, setLoading] = useState(true);
+    // let [loading, setLoading] = useState(true);
     let [introTitle, setIntroTitle] = useState("");
     let [intro, setIntro] = useState("");
 
@@ -101,7 +101,7 @@ export default function Intro() {
             <p className="mt-8 text-xl text-gray-500 leading-8">
             </p>
           </div>
-          <div className="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(intro)}}></div>
+          <div className="mt-6 text-md prose prose-indigo prose-lg text-gray-500 mx-auto" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(intro)}}></div>
         </div>
       </div>
     )
