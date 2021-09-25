@@ -34,11 +34,11 @@ function Navbar(props) {
 								</Popover.Button>
 							</div>
 							<Link to="/" className="flex-shrink-0 flex items-center">
-								<h1 className="text-2xl font-bold antialiased">Ré-Unir</h1>
+								<h1 className="text-2xl font-bold antialiased text-blue-700">Ré-Unir</h1>
 							</Link>
 							<div className="hidden md:ml-6 md:flex md:space-x-8">
 								{props.routes.map(route => {
-									return route.navbar && <Link
+									return <Link
 										key={route.id}
 										to={route.path}
 										className={props.location.pathname === route.path ? linkActive : linkNotActive}
@@ -61,7 +61,7 @@ function Navbar(props) {
 					<Popover.Panel className="md:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{props.routes.map(route => {
-								return route.navbar && <Link
+								return <Link
 									key={route.id}
 									to={route.path}
 									className={props.location.pathname === route.path ? linkActiveMobile : linkNotActiveMobile}

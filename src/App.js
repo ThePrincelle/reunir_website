@@ -14,7 +14,6 @@ function App() {
 	const routes = [
 		{
 			id: "home",
-			navbar: true,
 			name: "Accueil",
 			path: "/",
 			exact: true,
@@ -22,7 +21,6 @@ function App() {
 		},
 		{
 			id: "psychanalyse",
-			navbar: true,
 			name: "Psychanalyse",
 			path: "/psychanalyse",
 			exact: false,
@@ -30,7 +28,6 @@ function App() {
 		},
 		{
 			id: "services",
-			navbar: true,
 			name: "Services",
 			path: "/services",
 			exact: false,
@@ -38,7 +35,6 @@ function App() {
 		},
 		{
 			id: "psychamarche",
-			navbar: true,
 			name: "Psychamarche",
 			path: "/psychamarche",
 			exact: false,
@@ -46,7 +42,6 @@ function App() {
 		},
 		{
 			id: "contact",
-			navbar: true,
 			name: "Contact",
 			path: "/contact",
 			exact: false,
