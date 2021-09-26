@@ -4,31 +4,42 @@ import { PlusSmIcon as PlusSmIconSolid } from "@heroicons/react/solid";
 
 import DOMPurify from "dompurify";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { getCollection } from "../cms";
 
+import Tabs from '../components/Tabs'
 import ServicesDetails from "../components/ServiceDetails";
 
 export default function Services(props) {
 	let [services, setServices] = useState([]);
 	let [details, setDetails] = useState(false);
-
+    let [currentTab, setCurrentTab] = useState("Particuliers")
+    let [tabs, setTabs] = useState([]);
+    
 	useEffect(() => {
         props.loader(true)
 		getCollection("service")
-			.then((data) => {
-				setServices(data.entries);
-                props.loader(false)
-			})
-			.catch((err) => console.error(err));
+        .then((data) => {
+            setServices(data.entries);
+            setTabs([...new Set(data.entries.map(item => item.type))])
+            setCurrentTab([...new Set(data.entries.map(item => item.type))][0])
+            props.loader(false)
+        })
+        .catch((err) => console.error(err));
 	}, []);
-
+    
 	let closeDetails = () => {
-		setTimeout(() => {
-			setDetails(false);
+        setTimeout(() => {
+            setDetails(false);
 		}, 250);
 	};
+
+    let setTab = (tab) => {
+        setCurrentTab(tab)
+    }
+    
+    let history = useHistory();
 
 	return (
 		<div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
@@ -44,20 +55,21 @@ export default function Services(props) {
 						Vous trouverez ici la liste des services que je propose.
 					</p>
 				</div>
-				<div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                <Tabs tabs={tabs} currentTab={currentTab} setCurrentTab={setTab} />
+				<div className="mt-8 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 					{services.map((service) => (
-                        service.publish && (
+                        (service.publish && service.type === currentTab) && (
 						<div
 							key={service.titre}
 							className="flex flex-col rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
-							onClick={() =>
-								service.description_detaillee &&
-								setDetails(service)
-							}
+							onClick={() => {
+                                service.description_detaillee && setDetails(service)
+								// service.redirect && history.push(service.redirect)
+							}}
 						>
 							<div className="flex-shrink-0 object-cover">
 								<img
-									className="h-48 w-full object-cover"
+									className="h-48 w-full object-cover bg-gray-100"
 									src={
 										"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=400&h=180&f[brighten]=10&o=true&src=" +
 										service.image.path
@@ -74,7 +86,7 @@ export default function Services(props) {
 										{service.titre}
 									</p>
 									<div
-										className="mt-3 text-base text-gray-500"
+										className="mt-3 text-base text-gray-500 space-y-2"
 										dangerouslySetInnerHTML={{
 											__html: DOMPurify.sanitize(
 												service.description_courte
@@ -82,6 +94,8 @@ export default function Services(props) {
 										}}
 									></div>
                                     {service.description_detaillee && <div className="pt-4 prose prose-yellow"><a onClick={() => {setDetails(service)}}>Plus d'informations...</a></div>}
+
+                                    {service.redirect && <div className="pt-4 prose prose-yellow"><a onClick={() => {history.push(service.redirect)}}>Plus d'informations...</a></div>}
 								</div>
                                 {(service.duree_details || service.prix_details) && (
 									<div className="pt-3">
@@ -114,7 +128,7 @@ export default function Services(props) {
 										</div>
 									</div>
 								)}
-								<div className="mt-6 flex items-center">
+								<div className="mt-4 flex items-center">
 									<div className="flex-shrink-0">
 										<span className="sr-only">
 											{service.prix}
@@ -151,6 +165,20 @@ export default function Services(props) {
 												/>
 											</button>
 										)}
+                                        {service.redirect && (
+                                            <button
+                                                onClick={() =>
+                                                    history.push(service.redirect)
+                                                }
+                                                type="button"
+                                                className="inline-flex ml-2 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+                                            >
+                                                <PlusSmIconSolid
+                                                    className="h-5 w-5"
+                                                    aria-hidden="true"
+                                                />
+                                            </button>
+                                        )}
 									</div>
 								</div>
 							</div>
