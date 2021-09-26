@@ -23,6 +23,7 @@ export default function Psychamarche(props) {
 	let [content, setContent] = useState(null);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		props.loader(true);
 		getSingleton("psychamarche")
 			.then((data) => {

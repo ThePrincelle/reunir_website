@@ -35,6 +35,7 @@ export default function Contact(props) {
 	let [messageStatus, setMessageStatus] = useState(null);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		props.loader(true);
 		getSingleton("contact")
 			.then((data) => {
@@ -534,7 +535,10 @@ export default function Contact(props) {
 								className="divide-y divide-gray-200"
 							>
 								{horaires.map((horaire) => (
-									<li key={horaire._id} className="py-4 flex text-base hover:bg-gray-50 transition-colors">
+									<li
+										key={horaire._id}
+										className="py-4 flex text-base hover:bg-gray-50 transition-colors"
+									>
 										<p className="font-medium text-gray-900 pl-4">
 											{horaire.jour}
 										</p>
@@ -581,21 +585,22 @@ export default function Contact(props) {
 										</Marker>
 									</MapContainer>
 									<figcaption className="mt-3 flex text-sm text-gray-500">
-											<LocationMarkerIcon
-												className="flex-none w-5 h-5 text-gray-400"
-												aria-hidden="true"
-											/>
-											<span className="ml-2">
+										<LocationMarkerIcon
+											className="flex-none w-5 h-5 text-gray-400"
+											aria-hidden="true"
+										/>
+										<span className="ml-2">
 											<a
-											href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
-											target="_blank"
-											className="hover:text-gray-800 transition-colors"
-										>
-											{cabinet.address}
-										</a><br/>
-										{cabinetDetails}
-											</span>
-										</figcaption>
+												href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+												target="_blank"
+												className="hover:text-gray-800 transition-colors"
+											>
+												{cabinet.address}
+											</a>
+											<br />
+											{cabinetDetails}
+										</span>
+									</figcaption>
 								</div>
 							)}
 						</div>
