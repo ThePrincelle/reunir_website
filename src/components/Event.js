@@ -1,12 +1,12 @@
 import React from "react";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
 import { CalendarIcon, ClockIcon } from "@heroicons/react/solid";
 
 import DOMPurify from "dompurify";
 
 import { Link } from "react-router-dom";
+
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import L from "leaflet";
 

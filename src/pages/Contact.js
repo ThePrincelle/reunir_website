@@ -1,15 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { MailIcon, PhoneIcon } from "@heroicons/react/outline";
+import {
+	MailIcon,
+	LocationMarkerIcon,
+	PhoneIcon,
+} from "@heroicons/react/outline";
 
-import { getSingleton } from "../cms";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-import MessageStatus from '../components/MessageStatus'
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+	iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
+	iconUrl: require("leaflet/dist/images/marker-icon.png").default,
+	shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
+});
+
+const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+
+import { getSingleton, getCollection } from "../cms";
+
+import MessageStatus from "../components/MessageStatus";
 
 export default function Contact(props) {
 	let [urlInstagram, setInstagramUrl] = useState("");
 	let [urlFacebook, setFacebookUrl] = useState("");
 	let [email, setEmail] = useState("");
 	let [phone, setPhone] = useState("");
+	let [cabinet, setCabinet] = useState(null);
+	let [cabinetDetails, setCabinetDetails] = useState(null);
+	let [horaires, setHoraires] = useState([]);
 
 	let [messageStatus, setMessageStatus] = useState(null);
 
@@ -17,19 +38,26 @@ export default function Contact(props) {
 		props.loader(true);
 		getSingleton("contact")
 			.then((data) => {
-				console.log(data)
-                setInstagramUrl(data.instagram);
+				setInstagramUrl(data.instagram);
 				setFacebookUrl(data.facebook);
 				setPhone(data.telephone);
 				setEmail(data.email);
+				setCabinet(data.bureau);
+				setCabinetDetails(data.bureau_detail);
 				props.loader(false);
+			})
+			.catch((err) => console.error(err));
+		getCollection("horaires")
+			.then((data) => {
+				console.log(data);
+				setHoraires(data.entries);
 			})
 			.catch((err) => console.error(err));
 	}, []);
 
 	let closeStatus = () => {
-        setTimeout(() => {
-            setMessageStatus(null);
+		setTimeout(() => {
+			setMessageStatus(null);
 		}, 250);
 	};
 
@@ -105,7 +133,7 @@ export default function Contact(props) {
 
 							<div className="grid grid-cols-1 lg:grid-cols-3">
 								{/* Contact information */}
-								<div className="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
+								<div className="relative overflow-hidden py-10 px-0 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
 									{/* Decorative angle backgrounds */}
 									<div
 										className="absolute inset-0 pointer-events-none sm:hidden"
@@ -224,7 +252,7 @@ export default function Contact(props) {
 									<dl className="mt-8 space-y-6">
 										<dt>
 											<span className="sr-only">
-												Phone number
+												Téléphone
 											</span>
 										</dt>
 										<dd className="flex text-base text-teal-50">
@@ -233,7 +261,16 @@ export default function Contact(props) {
 												aria-hidden="true"
 											/>
 											<span className="ml-3">
-												{phone}
+												<a
+													href={`tel:${phone.replace(
+														/\s/g,
+														""
+													)}`}
+													target="_blank"
+													className="hover:text-gray-200 transition-colors"
+												>
+													{phone}
+												</a>
 											</span>
 										</dd>
 										<dt>
@@ -247,7 +284,35 @@ export default function Contact(props) {
 												aria-hidden="true"
 											/>
 											<span className="ml-3">
-												{email}
+												<a
+													href={`mailto:${email}`}
+													target="_blank"
+													className="hover:text-gray-200 transition-colors"
+												>
+													{email}
+												</a>
+											</span>
+										</dd>
+										<dt>
+											<span className="sr-only">
+												Adresse
+											</span>
+										</dt>
+										<dd className="flex text-base text-teal-50">
+											<LocationMarkerIcon
+												className="flex-shrink-0 w-6 h-6 text-teal-200"
+												aria-hidden="true"
+											/>
+											<span className="ml-3">
+												{cabinet && (
+													<a
+														href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+														target="_blank"
+														className="hover:text-gray-200 transition-colors"
+													>
+														{cabinet.address}
+													</a>
+												)}
 											</span>
 										</dd>
 									</dl>
@@ -257,7 +322,7 @@ export default function Contact(props) {
 									>
 										<li>
 											<a
-												className="text-teal-200 hover:text-teal-100"
+												className="text-teal-200 hover:text-teal-100 transition-colors"
 												href={urlFacebook}
 											>
 												<span className="sr-only">
@@ -279,7 +344,7 @@ export default function Contact(props) {
 										</li>
 										<li>
 											<a
-												className="text-teal-200 hover:text-teal-100"
+												className="text-teal-200 hover:text-teal-100 transition-colors"
 												href={urlInstagram}
 											>
 												<span className="sr-only">
@@ -434,7 +499,9 @@ export default function Contact(props) {
 										<div className="sm:col-span-2 sm:flex sm:justify-end">
 											<button
 												type="button"
-												onClick={() => setMessageStatus("OK")}
+												onClick={() =>
+													setMessageStatus("OK")
+												}
 												className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
 											>
 												Envoyer
@@ -457,10 +524,80 @@ export default function Contact(props) {
 							Cabinet
 						</h2>
 						<p className="mt-6 text-lg text-warm-gray-500 max-w-3xl">
-							Vous trouverez ici l'emplacement et les horaires d'ouverture de mon cabinet ainsi que les moyens d'accès à ce dernier.
+							Vous trouverez ici l'emplacement et les horaires
+							d'ouverture de mon cabinet ainsi que les moyens
+							d'accès à ce dernier.
 						</p>
-						<div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-							
+						<div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-max">
+							<ul
+								role="list"
+								className="divide-y divide-gray-200"
+							>
+								{horaires.map((horaire) => (
+									<li key={horaire._id} className="py-4 flex text-base hover:bg-gray-50 transition-colors">
+										<p className="font-medium text-gray-900 pl-4">
+											{horaire.jour}
+										</p>
+										<p className="text-gray-500 ml-auto pr-4">
+											{horaire.ouvert
+												? horaire.debut +
+												  " - " +
+												  horaire.fin
+												: "Fermé"}
+										</p>
+									</li>
+								))}
+							</ul>
+							{cabinet && (
+								<div>
+									<MapContainer
+										style={{ height: "20rem" }}
+										center={[cabinet.lat, cabinet.lng]}
+										zoom={18}
+										scrollWheelZoom={"center"}
+										dragging={false}
+										zoomControl={true}
+										boxZoom={false}
+										doubleClickZoom={false}
+									>
+										<TileLayer
+											attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+											url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+										/>
+										<Marker
+											position={[
+												cabinet.lat,
+												cabinet.lng,
+											]}
+										>
+											<Popup>
+												<a
+													href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+													target="_blank"
+												>
+													Google Maps
+												</a>
+											</Popup>
+										</Marker>
+									</MapContainer>
+									<figcaption className="mt-3 flex text-sm text-gray-500">
+											<LocationMarkerIcon
+												className="flex-none w-5 h-5 text-gray-400"
+												aria-hidden="true"
+											/>
+											<span className="ml-2">
+											<a
+											href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+											target="_blank"
+											className="hover:text-gray-800 transition-colors"
+										>
+											{cabinet.address}
+										</a><br/>
+										{cabinetDetails}
+											</span>
+										</figcaption>
+								</div>
+							)}
 						</div>
 					</div>
 				</section>

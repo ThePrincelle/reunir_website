@@ -67,7 +67,7 @@ export default function Footer(props) {
 							<div key={route.id} className="px-5 py-2">
 								<Link
 									to={route.path}
-									className="text-base text-gray-500 hover:text-gray-900"
+									className="text-base text-gray-500 hover:text-gray-900 transition-colors"
 								>
 									{route.name}
 								</Link>
@@ -78,7 +78,7 @@ export default function Footer(props) {
 						<a
 							key="facebook"
 							href={urlFacebook}
-							className="text-gray-400 hover:text-gray-500"
+							className="text-gray-400 hover:text-gray-500 transition-colors"
 						>
 							<span className="sr-only">Facebook</span>
 							{facebookIcon}
@@ -86,7 +86,7 @@ export default function Footer(props) {
 						<a
 							key="instagram"
 							href={urlInstagram}
-							className="text-gray-400 hover:text-gray-500"
+							className="text-gray-400 hover:text-gray-500 transition-colors"
 						>
 							<span className="sr-only">Instagram</span>
 							{instagramIcon}
@@ -100,7 +100,7 @@ export default function Footer(props) {
 						<span className="block">
 							Conçu par{" "}
 							<a
-								className="text-gray-400 hover:text-gray-500"
+								className="text-gray-400 hover:text-gray-500 transition-colors"
 								href="https://princelle.org"
 								target="_blank"
 							>
