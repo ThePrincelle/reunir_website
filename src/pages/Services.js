@@ -57,7 +57,7 @@ export default function Services() {
 								<img
 									className="h-48 w-full object-cover"
 									src={
-										"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=400&h=180&f[brighten]=25&o=true&src=" +
+										"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=400&h=180&f[brighten]=10&o=true&src=" +
 										service.image.path
 									}
 									alt=""
