@@ -39,8 +39,7 @@ export default function Services() {
 						Services
 					</h2>
 					<p className="mt-3 max-w-2xl mx-auto text-md sm:text-lg text-gray-500 sm:mt-4">
-						Vous trouverez ici la liste des services que je
-						propose.
+						Vous trouverez ici la liste des services que je propose.
 					</p>
 				</div>
 				<div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
@@ -48,10 +47,10 @@ export default function Services() {
 						<div
 							key={service.titre}
 							className="flex flex-col rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
-                            onClick={() =>
-                                service.description_detaillee &&
-                                setDetails(service)
-                            }
+							onClick={() =>
+								service.description_detaillee &&
+								setDetails(service)
+							}
 						>
 							<div className="flex-shrink-0 object-cover">
 								<img
@@ -64,13 +63,11 @@ export default function Services() {
 								/>
 							</div>
 							<div className="flex-1 bg-white p-6 flex flex-col justify-between">
-								<div className="flex-1">
+								<div className="flex-1 pb-5">
 									<p className="text-sm font-medium text-green-600">
 										{service.type}
 									</p>
-									<p
-										className="text-xl font-semibold pt-2 text-gray-900"
-									>
+									<p className="text-xl font-semibold pt-2 text-gray-900">
 										{service.titre}
 									</p>
 									<div
@@ -81,16 +78,39 @@ export default function Services() {
 											),
 										}}
 									></div>
+                                    {service.description_detaillee && <div className="pt-4 prose prose-yellow"><a onClick={() => {setDetails(service)}}>Plus d'informations...</a></div>}
 								</div>
-                                {service.prix_details && <div className="pt-3"><div className="relative pt-6 pb-2 m-0">
-                                    <div
-                                        className="absolute inset-0 flex items-center"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="w-full border-t border-gray-300" />
-                                    </div>
-                                </div>
-                                <div className="italic text-gray-500 text-sm">{service.prix_details}</div></div>}
+                                {(service.duree_details || service.prix_details) && (
+									<div className="pt-3">
+										<div className="relative">
+											<div
+												className="absolute inset-0 flex items-center"
+												aria-hidden="true"
+											>
+												<div className="w-full border-t border-gray-300" />
+											</div>
+											<div className="relative flex justify-center">
+												<span className="px-2 bg-white text-sm text-gray-500">
+													Détails
+												</span>
+											</div>
+										</div>
+									</div>
+								)}
+								{service.duree_details && (
+									<div className="pt-1">
+										<div className="pt-1 italic text-gray-500 text-sm">
+											{service.duree_details}
+										</div>
+									</div>
+								)}
+								{service.prix_details && (
+									<div className="pt-1">
+										<div className="pt-1 italic text-gray-500 text-sm">
+											{service.prix_details}
+										</div>
+									</div>
+								)}
 								<div className="mt-6 flex items-center">
 									<div className="flex-shrink-0">
 										<span className="sr-only">

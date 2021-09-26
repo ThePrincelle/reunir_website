@@ -56,7 +56,7 @@ export default function ServicesDetails(props) {
 							/>
 							<div className="pt-40">
 								<div className="flex-1 bg-white pt-8 pb-6 p-2 flex flex-col justify-between">
-									<div className="flex-1">
+									<div className="flex-1 pb-5">
 										<p className="text-sm font-medium text-green-600">
 											{props.service.type}
 										</p>
@@ -73,15 +73,37 @@ export default function ServicesDetails(props) {
 											}}
 										></div>
 									</div>
-                                    {props.service.prix_details && <div className="pt-3"><div className="relative pt-6 pb-2 m-0">
-                                    <div
-                                        className="absolute inset-0 flex items-center"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="w-full border-t border-gray-300" />
-                                    </div>
-                                </div>
-                                <div className="italic text-gray-500 text-sm">{props.service.prix_details}</div></div>}
+                                    {(props.service.duree_details || props.service.prix_details) && (
+									<div className="pt-3">
+										<div className="relative">
+											<div
+												className="absolute inset-0 flex items-center"
+												aria-hidden="true"
+											>
+												<div className="w-full border-t border-gray-300" />
+											</div>
+											<div className="relative flex justify-center">
+												<span className="px-2 bg-white text-sm text-gray-500">
+													Détails
+												</span>
+											</div>
+										</div>
+									</div>
+								)}
+								{props.service.duree_details && (
+									<div className="pt-1">
+										<div className="pt-1 italic text-gray-500 text-sm">
+											{props.service.duree_details}
+										</div>
+									</div>
+								)}
+								{props.service.prix_details && (
+									<div className="pt-1">
+										<div className="pt-1 italic text-gray-500 text-sm">
+											{props.service.prix_details}
+										</div>
+									</div>
+								)}
 									<div className="mt-6 flex items-center">
 										<div className="flex-shrink-0">
 											<span className="sr-only">
