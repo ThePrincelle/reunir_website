@@ -44,6 +44,7 @@ export default function Services() {
 				</div>
 				<div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 					{services.map((service) => (
+                        service.publish && (
 						<div
 							key={service.titre}
 							className="flex flex-col rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
@@ -151,7 +152,7 @@ export default function Services() {
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>)
 					))}
 				</div>
 			</div>
