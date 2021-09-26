@@ -7,8 +7,9 @@ import Footer from './components/Footer'
 // Pages
 import Home from './pages/Home'
 import About from './pages/About'
-import Users from './pages/Users'
-
+import Services from './pages/Services'
+import Psychamarche from './pages/Psychamarche'
+import Contact from './pages/Contact'
 
 function App() {
 	const routes = [
@@ -20,9 +21,9 @@ function App() {
 			component: Home
 		},
 		{
-			id: "psychanalyse",
-			name: "Psychanalyse",
-			path: "/psychanalyse",
+			id: "presentations",
+			name: "Présentations",
+			path: "/presentations",
 			exact: false,
 			component: About
 		},
@@ -31,21 +32,21 @@ function App() {
 			name: "Services",
 			path: "/services",
 			exact: false,
-			component: Users
+			component: Services
 		},
 		{
 			id: "psychamarche",
 			name: "Psychamarche",
 			path: "/psychamarche",
 			exact: false,
-			component: Users
+			component: Psychamarche
 		},
 		{
 			id: "contact",
 			name: "Contact",
 			path: "/contact",
 			exact: false,
-			component: Users
+			component: Contact
 		}
 	];
 

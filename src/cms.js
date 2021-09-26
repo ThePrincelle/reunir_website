@@ -13,3 +13,15 @@ export function getSingleton(name) {
             });
     });
 }
+
+export function getCollection(name) {
+    return new Promise((resolve, reject) => {
+        axios.get(`${BASE_URL}/api/collections/get/${name}`)
+            .then(function ({data}) {
+                resolve(data);
+            })
+            .catch(function (error) {
+                reject(error);
+            });
+    });
+}

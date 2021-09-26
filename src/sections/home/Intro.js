@@ -17,7 +17,7 @@ export default function Intro() {
                 setIntro(data.contenu)
             })
             .catch((err) => console.error(err));
-    })
+    }, [])
 
     return (
       <div className="relative py-16 bg-white overflow-hidden">
