@@ -158,7 +158,7 @@ export default function Event(props) {
 						href={`https://maps.google.com/?q=${props.event.lieu.lat},${props.event.lieu.lng}`}
 						target="_blank"
 						type="button"
-						class="inline-flex ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
+						className="inline-flex ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

@@ -14,7 +14,7 @@ export default function Footer(props) {
 				setFacebookUrl(data.facebook);
 			})
 			.catch((err) => console.error(err));
-	});
+	}, []);
 
 	let facebookIcon = (
 		<svg
