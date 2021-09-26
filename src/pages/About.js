@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify'
 
 import { getSingleton } from '../cms'
 
-export default function About() {
+export default function About(props) {
 
     let [contenu_gauche, setContenuGauche] = useState("");
     let [contenu_droite, setContenuDroite] = useState("");
@@ -19,6 +19,7 @@ export default function About() {
                 setTitre(data.titre)
                 setContenuGauche(data.contenu_gauche)
                 setContenuDroite(data.contenu_droite)
+                props.loader(false)
             })
             .catch((err) => console.error(err));
     }, [])

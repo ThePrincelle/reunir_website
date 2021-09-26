@@ -4,9 +4,8 @@ import DOMPurify from 'dompurify'
 
 import { getSingleton } from '../../cms'
 
-export default function Intro() {
+export default function Intro(props) {
 
-    // let [loading, setLoading] = useState(true);
     let [introTitle, setIntroTitle] = useState("");
     let [intro, setIntro] = useState("");
 
@@ -15,6 +14,7 @@ export default function Intro() {
             .then((data) => {
                 setIntroTitle(data.titre)
                 setIntro(data.contenu)
+                props.loader(false)
             })
             .catch((err) => console.error(err));
     }, [])

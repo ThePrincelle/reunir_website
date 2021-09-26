@@ -1,8 +1,10 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
+// Components
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Loading from './components/Loading'
 
 // Pages
 import Home from './pages/Home'
@@ -50,16 +52,23 @@ function App() {
 		}
 	];
 
+	let [loading, setLoading] = useState(true);
+
+	let setLoaded = (state) => {
+		setLoading(state);
+	}
+
 	return (
 		<Router>
 			<div>
 				<Navbar routes={routes} />
+				<Loading loading={loading} />
 
 				<Switch>
 
 				{routes.map((route) => (
 					<Route key={route.id} path={route.path} exact={route.exact}>
-						<route.component />
+						<route.component loader={setLoaded} />
 					</Route>
 				))}
 

@@ -10,7 +10,7 @@ import { getCollection } from "../cms";
 
 import ServicesDetails from "../components/ServiceDetails";
 
-export default function Services() {
+export default function Services(props) {
 	let [services, setServices] = useState([]);
 	let [details, setDetails] = useState(false);
 
@@ -18,6 +18,7 @@ export default function Services() {
 		getCollection("service")
 			.then((data) => {
 				setServices(data.entries);
+                props.loader(false)
 			})
 			.catch((err) => console.error(err));
 	}, []);

@@ -59,7 +59,7 @@ export default function Home(props) {
 				</div>
 			</div>
 
-			<Intro />
+			<Intro loader={props.loader} />
 		</div>
 	);
 }
