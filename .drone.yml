@@ -34,7 +34,7 @@ steps:
       {
         "token": "a3arkn5phqihc15auh7ikayxr5yiub",
         "user": "ubb25dk7snjn9hri5137moi3q5k53a",
-        "message": "Mise en production de 'apps-dashboard'."
+        "message": "Mise en production de 're-unir.fr'."
       }
 
 - name: cleaning
