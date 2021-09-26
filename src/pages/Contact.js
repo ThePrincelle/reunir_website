@@ -133,7 +133,7 @@ export default function Contact(props) {
 
 							<div className="grid grid-cols-1 lg:grid-cols-3">
 								{/* Contact information */}
-								<div className="relative overflow-hidden py-10 px-0 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
+								<div className="relative overflow-hidden py-10 px-5 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
 									{/* Decorative angle backgrounds */}
 									<div
 										className="absolute inset-0 pointer-events-none sm:hidden"
