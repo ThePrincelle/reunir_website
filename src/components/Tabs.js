@@ -16,6 +16,7 @@ export default function Tabs(props) {
 				<select
 					id="tabs"
 					name="tabs"
+					onChange={(e) => {props.setCurrentTab(e.target.value)}}
 					className="block w-full focus:ring-yellow-500 focus:border-yellow-500 border-gray-300 rounded-md"
 					defaultValue={tabs.find((tab) => tab.currentTab)}
 				>
