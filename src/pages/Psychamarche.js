@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 
 import DOMPurify from "dompurify";
 
-import { getSingleton, getCollection } from "../cms";
+import { getSingleton } from "../cms";
+
+import { HashLink } from "react-router-hash-link";
 
 const pages = [
 	{ name: "Services", href: "/services", current: false },
@@ -25,7 +27,7 @@ export default function Psychamarche(props) {
 		getSingleton("psychamarche")
 			.then((data) => {
 				setContent(data);
-                props.loader(false)
+				props.loader(false);
 			})
 			.catch((err) => console.error(err));
 	}, []);
@@ -78,6 +80,30 @@ export default function Psychamarche(props) {
 						<h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
 							Psychamarche
 						</h3>
+						<HashLink to="/psychamarche#events">
+							<button
+								type="button"
+								class="inline-flex mt-4 ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6 animate-pulse"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+									/>
+								</svg>
+								<span className="text-sm font-medium pr-1">
+									Aller aux évènements
+								</span>
+							</button>
+						</HashLink>
 					</div>
 				</div>
 				{content && (
