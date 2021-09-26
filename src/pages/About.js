@@ -14,6 +14,7 @@ export default function About(props) {
     let [titre, setTitre] = useState("")
 
     useEffect(() => {
+        props.loader(true)
         getSingleton("presentations")
             .then((data) => {
                 setTitre(data.titre)

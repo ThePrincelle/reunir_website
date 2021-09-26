@@ -10,6 +10,7 @@ export default function Intro(props) {
     let [intro, setIntro] = useState("");
 
     useEffect(() => {
+        props.loader(true)
         getSingleton("introduction")
             .then((data) => {
                 setIntroTitle(data.titre)

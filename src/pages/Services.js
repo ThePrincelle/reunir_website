@@ -15,6 +15,7 @@ export default function Services(props) {
 	let [details, setDetails] = useState(false);
 
 	useEffect(() => {
+        props.loader(true)
 		getCollection("service")
 			.then((data) => {
 				setServices(data.entries);

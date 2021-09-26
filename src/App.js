@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from "react-router-dom";
 
 // Components
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Loading from './components/Loading'
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
 // Pages
-import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/Services'
-import Psychamarche from './pages/Psychamarche'
-import Contact from './pages/Contact'
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Psychamarche from "./pages/Psychamarche";
+import Contact from "./pages/Contact";
 
 function App() {
 	const routes = [
@@ -20,43 +25,43 @@ function App() {
 			name: "Accueil",
 			path: "/",
 			exact: true,
-			component: Home
+			component: Home,
 		},
 		{
 			id: "presentations",
 			name: "Présentations",
 			path: "/presentations",
 			exact: false,
-			component: About
+			component: About,
 		},
 		{
 			id: "services",
 			name: "Services",
 			path: "/services",
 			exact: false,
-			component: Services
+			component: Services,
 		},
 		{
 			id: "psychamarche",
 			name: "Psychamarche",
 			path: "/psychamarche",
 			exact: false,
-			component: Psychamarche
+			component: Psychamarche,
 		},
 		{
 			id: "contact",
 			name: "Contact",
 			path: "/contact",
 			exact: false,
-			component: Contact
-		}
+			component: Contact,
+		},
 	];
 
 	let [loading, setLoading] = useState(true);
 
 	let setLoaded = (state) => {
 		setLoading(state);
-	}
+	};
 
 	return (
 		<Router>
@@ -65,15 +70,17 @@ function App() {
 				<Loading loading={loading} />
 
 				<Switch>
+					{routes.map((route) => (
+						<Route
+							key={route.id}
+							path={route.path}
+							exact={route.exact}
+						>
+							<route.component loader={setLoaded} />
+						</Route>
+					))}
 
-				{routes.map((route) => (
-					<Route key={route.id} path={route.path} exact={route.exact}>
-						<route.component loader={setLoaded} />
-					</Route>
-				))}
-
-				<Redirect to="/"/>
-
+					<Redirect to="/" />
 				</Switch>
 
 				<Footer routes={routes} />

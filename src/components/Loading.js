@@ -6,10 +6,10 @@ export default function Loading(props) {
 		<Transition
 			show={props.loading}
 			as={Fragment}
-			enter="ease-out"
-			enterFrom="opacity-0"
+            enter="transition-opacity"
+			enterFrom="opacity-100"
 			enterTo="opacity-100"
-			leave="ease-in duration-300"
+			leave="ease-in duration-150"
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
 		>
