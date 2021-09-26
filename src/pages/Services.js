@@ -22,8 +22,8 @@ export default function Services(props) {
 		getCollection("service")
         .then((data) => {
             setServices(data.entries);
-            setTabs([...new Set(data.entries.map(item => item.type))])
-            setCurrentTab([...new Set(data.entries.map(item => item.type))][0])
+            setTabs([...new Set(data.entries.filter(item => item.publish == true).map(item => item.type))])
+            setCurrentTab([...new Set(data.entries.filter(item => item.publish == true).map(item => item.type))][0])
             props.loader(false)
         })
         .catch((err) => console.error(err));
@@ -55,7 +55,7 @@ export default function Services(props) {
 						Vous trouverez ici la liste des services que je propose.
 					</p>
 				</div>
-                <Tabs tabs={tabs} currentTab={currentTab} setCurrentTab={setTab} />
+                {tabs.length > 1 && <Tabs tabs={tabs} currentTab={currentTab} setCurrentTab={setTab} />}
 				<div className="mt-8 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 					{services.map((service) => (
                         (service.publish && service.type === currentTab) && (
