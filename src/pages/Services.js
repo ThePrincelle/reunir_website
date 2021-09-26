@@ -82,6 +82,15 @@ export default function Services() {
 										}}
 									></div>
 								</div>
+                                {service.prix_details && <div className="pt-3"><div className="relative pt-6 pb-2 m-0">
+                                    <div
+                                        className="absolute inset-0 flex items-center"
+                                        aria-hidden="true"
+                                    >
+                                        <div className="w-full border-t border-gray-300" />
+                                    </div>
+                                </div>
+                                <div className="italic text-gray-500 text-sm">{service.prix_details}</div></div>}
 								<div className="mt-6 flex items-center">
 									<div className="flex-shrink-0">
 										<span className="sr-only">
