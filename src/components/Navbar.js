@@ -8,9 +8,9 @@ import {
   } from "react-router-dom";
 
 function Navbar(props) {
-    let linkActive = "border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+    let linkActive = "border-yellow-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 
-	let linkActiveMobile = "bg-blue-50 border-blue-500 text-blue-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
+	let linkActiveMobile = "bg-yellow-50 border-yellow-500 text-yellow-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium sm:pl-5 sm:pr-6"
 
 	let linkNotActive = "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 
@@ -24,7 +24,7 @@ function Navbar(props) {
 						<div className="flex justify-between h-16 full-width sm:flex-row flex-row-reverse">
 							<div className="-ml-2 mr-2 flex items-center md:hidden">
 								{/* Mobile menu button */}
-								<Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+								<Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500">
 									<span className="sr-only">Open main menu</span>
 									{open ? (
 										<XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -34,7 +34,7 @@ function Navbar(props) {
 								</Popover.Button>
 							</div>
 							<Link to="/" className="flex-shrink-0 flex items-center">
-								<h1 className="text-2xl font-bold antialiased text-blue-700">Ré-Unir</h1>
+								<h1 className="text-2xl font-bold antialiased text-green-700">Ré-Unir</h1>
 							</Link>
 							<div className="hidden md:ml-6 md:flex md:space-x-8">
 								{props.routes.map(route => {

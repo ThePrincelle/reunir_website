@@ -91,7 +91,7 @@ export default function Intro() {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-lg max-w-prose mx-auto">
             <h1>
-              <span className="block text-base text-center text-blue-600 font-semibold tracking-wide uppercase">
+              <span className="block text-base text-center text-green-600 font-semibold tracking-wide uppercase">
                 Introduction
               </span>
               <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -101,7 +101,7 @@ export default function Intro() {
             <p className="mt-8 text-xl text-gray-500 leading-8">
             </p>
           </div>
-          <div className="mt-6 text-md prose prose-indigo prose-lg text-gray-500 mx-auto" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(intro)}}></div>
+          <div className="mt-6 text-md prose prose-yellow prose-lg text-gray-500 mx-auto" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(intro)}}></div>
         </div>
       </div>
     )
