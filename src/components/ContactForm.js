@@ -68,8 +68,16 @@ export default function ContactForm(props) {
 		}
 	}, [selected]);
 
+	useEffect(() => {
+		console.log(sService);
+	}, [sService]);
+
+	useEffect(() => {
+		console.log(sMarche);
+	}, [sMarche]);
+
 	let sendMessage = (e) => {
-        e.preventDefault();
+		e.preventDefault();
 
 		let dataForm = {
 			prenom: firstName,
@@ -136,7 +144,7 @@ export default function ContactForm(props) {
 	};
 
 	let resetForm = () => {
-        document.getElementById("contact-form").reset();
+		document.getElementById("contact-form").reset();
 		setFirstName("");
 		setLastName("");
 		setEmail("");
@@ -150,8 +158,9 @@ export default function ContactForm(props) {
 
 	return (
 		<form
-            id="contact-form"
+			id="contact-form"
 			className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+			type="POST"
 			onSubmit={(e) => {
 				sendMessage(e);
 			}}
@@ -168,7 +177,7 @@ export default function ContactForm(props) {
 						type="text"
 						name="first-name"
 						id="first-name"
-                        required="required"
+						required="required"
 						onChange={(e) => {
 							setFirstName(e.target.value);
 						}}
@@ -189,7 +198,7 @@ export default function ContactForm(props) {
 						type="text"
 						name="last-name"
 						id="last-name"
-                        required="required"
+						required="required"
 						onChange={(e) => {
 							setLastName(e.target.value);
 						}}
@@ -210,7 +219,7 @@ export default function ContactForm(props) {
 						id="email"
 						name="email"
 						type="email"
-                        required="required"
+						required="required"
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
@@ -249,283 +258,108 @@ export default function ContactForm(props) {
 				</div>
 			</div>
 			<div className="sm:col-span-2">
-				<Listbox value={selected} onChange={setSelected}>
-					<Listbox.Label className="block text-sm font-medium text-gray-700">
-						Objet du message
-					</Listbox.Label>
-					<div className="mt-1 relative">
-						<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm">
-							<span className="block truncate">
-								{selected.name}
-							</span>
-							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-								<SelectorIcon
-									className="h-5 w-5 text-gray-400"
-									aria-hidden="true"
-								/>
-							</span>
-						</Listbox.Button>
-
-						<Transition
-							as={Fragment}
-							leave="transition ease-in duration-100"
-							leaveFrom="opacity-100"
-							leaveTo="opacity-0"
-						>
-							<Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-								{objects.map((object) => (
-									<Listbox.Option
-										key={object.id}
-										className={({ active }) =>
-											classNames(
-												active
-													? "text-white bg-green-600"
-													: "text-gray-900",
-												"cursor-default select-none relative py-2 pl-3 pr-9"
-											)
-										}
-										value={object}
-									>
-										{({ selected, active }) => (
-											<>
-												<span
-													className={classNames(
-														selected
-															? "font-semibold"
-															: "font-normal",
-														"block truncate"
-													)}
-												>
-													{object.name}
-												</span>
-
-												{selected ? (
-													<span
-														className={classNames(
-															active
-																? "text-white"
-																: "text-green-600",
-															"absolute inset-y-0 right-0 flex items-center pr-4"
-														)}
-													>
-														<CheckIcon
-															className="h-5 w-5"
-															aria-hidden="true"
-														/>
-													</span>
-												) : null}
-											</>
-										)}
-									</Listbox.Option>
-								))}
-							</Listbox.Options>
-						</Transition>
-					</div>
-				</Listbox>
+				<label
+					htmlFor="object"
+					className="block text-sm font-medium text-gray-700"
+				>
+					Objet du message
+				</label>
+				<select
+					id="object"
+					name="object"
+					onChange={(e) =>
+						setSelected(
+							objects.filter((o) => o.id === e.target.value)[0]
+						)
+					}
+					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+					defaultValue={selected}
+				>
+					{objects.map((object) => (
+						<option key={object.id} value={object.id}>
+							{object.name}
+						</option>
+					))}
+				</select>
 			</div>
 			{selected.id == "psychamarche" && psychamarches && (
 				<div className="sm:col-span-2">
-					<Listbox value={sMarche} onChange={setsMarche}>
-						<Listbox.Label className="block text-sm font-medium text-gray-700">
-							Séance de psychamarche ou autre
-						</Listbox.Label>
-						<div className="mt-1 relative">
-							<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm">
-								<span className="block truncate">
-									{sMarche
-										? "text" in sMarche
-											? sMarche.text
-											: sMarche.titre +
-											  " (" +
-											  sMarche.lieu.address
-													.split(", ")
-													.slice(0, -2)
-													.join(", ") +
-											  ") - " +
-											  new Date(
-													sMarche.date
-											  ).toLocaleDateString(
-													"fr-FR",
-													dateOptions
-											  ) +
-											  " " +
-											  sMarche.heure
-										: "Veuillez sélectionner une séance ou autre."}
-								</span>
-								<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-									<SelectorIcon
-										className="h-5 w-5 text-gray-400"
-										aria-hidden="true"
-									/>
-								</span>
-							</Listbox.Button>
-
-							<Transition
-								as={Fragment}
-								leave="transition ease-in duration-100"
-								leaveFrom="opacity-100"
-								leaveTo="opacity-0"
-							>
-								<Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-									{psychamarches.map((event) => (
-										<Listbox.Option
-											key={event._id}
-											className={({ active }) =>
-												classNames(
-													active
-														? "text-white bg-green-600"
-														: "text-gray-900",
-													"cursor-default select-none relative py-2 pl-3 pr-9"
-												)
-											}
-											value={event}
-										>
-											{({ sMarche, active }) => (
-												<>
-													<span
-														className={classNames(
-															sMarche
-																? "font-semibold"
-																: "font-normal",
-															"block truncate"
-														)}
-													>
-														{"text" in event
-															? event.text
-															: event.titre +
-															  " (" +
-															  event.lieu.address
-																	.split(", ")
-																	.slice(
-																		0,
-																		-2
-																	)
-																	.join(
-																		", "
-																	) +
-															  ") - " +
-															  new Date(
-																	event.date
-															  ).toLocaleDateString(
-																	"fr-FR",
-																	dateOptions
-															  ) +
-															  " " +
-															  event.heure}
-													</span>
-
-													{sMarche ? (
-														<span
-															className={classNames(
-																active
-																	? "text-white"
-																	: "text-green-600",
-																"absolute inset-y-0 right-0 flex items-center pr-4"
-															)}
-														>
-															<CheckIcon
-																className="h-5 w-5"
-																aria-hidden="true"
-															/>
-														</span>
-													) : null}
-												</>
-											)}
-										</Listbox.Option>
-									))}
-								</Listbox.Options>
-							</Transition>
-						</div>
-					</Listbox>
+					<label
+						htmlFor="seance"
+						className="block text-sm font-medium text-gray-700"
+					>
+						Séance de psychamarche
+					</label>
+					<select
+						id="seance"
+						name="seance"
+						onChange={(e) => {
+							setsMarche(
+								psychamarches.filter(
+									(o) => o._id === e.target.value
+								)[0]
+							);
+						}}
+						className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+					>
+						<option hidden disabled selected value>
+							{" "}
+							-- Sélectionner un évènement ou autre --{" "}
+						</option>
+						{psychamarches.map((event) => (
+							<option key={event._id} value={event._id}>
+								{"text" in event
+									? event.text
+									: event.titre +
+									  " (" +
+									  event.lieu.address
+											.split(", ")
+											.slice(0, -2)
+											.join(", ") +
+									  ") - " +
+									  new Date(event.date).toLocaleDateString(
+											"fr-FR",
+											dateOptions
+									  ) +
+									  " " +
+									  event.heure}
+							</option>
+						))}
+					</select>
 				</div>
 			)}
 			{selected.id == "rdv" && services && (
 				<div className="sm:col-span-2">
-					<Listbox value={sService} onChange={setsService}>
-						<Listbox.Label className="block text-sm font-medium text-gray-700">
-							Service demandé
-						</Listbox.Label>
-						<div className="mt-1 relative">
-							<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm">
-								<span className="block truncate">
-									{sService
-										? "text" in sService
-											? sService.text
-											: sService.titre +
-											  " (" +
-											  sService.type +
-											  ")"
-										: "Veuillez sélectionner un service ou autre."}
-								</span>
-								<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-									<SelectorIcon
-										className="h-5 w-5 text-gray-400"
-										aria-hidden="true"
-									/>
-								</span>
-							</Listbox.Button>
-
-							<Transition
-								as={Fragment}
-								leave="transition ease-in duration-100"
-								leaveFrom="opacity-100"
-								leaveTo="opacity-0"
-							>
-								<Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-									{services.map((service) => (
-										<Listbox.Option
-											key={service._id}
-											className={({ active }) =>
-												classNames(
-													active
-														? "text-white bg-green-600"
-														: "text-gray-900",
-													"cursor-default select-none relative py-2 pl-3 pr-9"
-												)
-											}
-											value={service}
-										>
-											{({ sService, active }) => (
-												<>
-													<span
-														className={classNames(
-															sService
-																? "font-semibold"
-																: "font-normal",
-															"block truncate"
-														)}
-													>
-														{"text" in service
-															? service.text
-															: service.titre +
-															  " (" +
-															  service.type +
-															  ")"}
-													</span>
-
-													{sService ? (
-														<span
-															className={classNames(
-																active
-																	? "text-white"
-																	: "text-green-600",
-																"absolute inset-y-0 right-0 flex items-center pr-4"
-															)}
-														>
-															<CheckIcon
-																className="h-5 w-5"
-																aria-hidden="true"
-															/>
-														</span>
-													) : null}
-												</>
-											)}
-										</Listbox.Option>
-									))}
-								</Listbox.Options>
-							</Transition>
-						</div>
-					</Listbox>
+					<label
+						htmlFor="service"
+						className="block text-sm font-medium text-gray-700"
+					>
+						Service demandé
+					</label>
+					<select
+						id="service"
+						name="service"
+						onChange={(e) => {
+							setsService(
+								services.filter(
+									(o) => o._id === e.target.value
+								)[0]
+							);
+						}}
+						className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+					>
+						<option hidden disabled selected value>
+							{" "}
+							-- Sélectionner un service ou autre --{" "}
+						</option>
+						{services.map((service) => (
+							<option key={service._id} value={service._id}>
+								{"text" in service
+									? service.text
+									: service.titre + " (" + service.type + ")"}
+							</option>
+						))}
+					</select>
 				</div>
 			)}
 			<div className="sm:col-span-2">
@@ -540,7 +374,7 @@ export default function ContactForm(props) {
 						type="text"
 						name="subject"
 						id="subject"
-                        required="required"
+						required="required"
 						onChange={(e) => {
 							setSubject(e.target.value);
 						}}
@@ -568,7 +402,7 @@ export default function ContactForm(props) {
 						id="message"
 						name="message"
 						rows={4}
-                        required="required"
+						required="required"
 						onChange={(e) => {
 							setMessage(e.target.value);
 						}}
