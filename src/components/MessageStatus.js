@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/outline";
+import { CheckIcon, XIcon } from "@heroicons/react/outline";
 
 export default function MessageStatus(props) {
 	const [open, setOpen] = useState(true);
@@ -44,22 +44,27 @@ export default function MessageStatus(props) {
 					>
 						<div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-16 sm:align-middle sm:max-w-lg sm:w-full p-5 px-14 m-auto mt-1/2 sm:p-6">
 							<div>
-								<div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+							{props.status == "OK" ? <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
 									<CheckIcon
 										className="h-6 w-6 text-green-600"
 										aria-hidden="true"
 									/>
-								</div>
+								</div> : <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+									<XIcon
+										className="h-6 w-6 text-red-600"
+										aria-hidden="true"
+									/>
+								</div>}
 								<div className="mt-3 text-center sm:mt-5">
 									<Dialog.Title
 										as="h3"
 										className="text-lg leading-6 font-medium text-gray-900"
 									>
-										Message envoyé avec succès
+										{props.status == "OK" ? "Message envoyé avec succès" : "Erreur lors de l'envoi du message"} 
 									</Dialog.Title>
 									<div className="mt-2">
 										<p className="text-sm text-gray-500">
-											Votre message a bien été envoyé.
+										{props.status == "OK" ? "Votre message a bien été envoyé." : "Vous pouvez tenter de recommencer ou alors m'envoyer un message directement."}
 										</p>
 									</div>
 								</div>
