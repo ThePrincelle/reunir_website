@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
 	MailIcon,
 	LocationMarkerIcon,
@@ -16,8 +17,6 @@ L.Icon.Default.mergeOptions({
 	iconUrl: require("leaflet/dist/images/marker-icon.png").default,
 	shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
 });
-
-const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
 
 import { getSingleton, getCollection } from "../cms";
 
