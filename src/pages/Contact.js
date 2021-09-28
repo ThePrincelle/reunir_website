@@ -72,9 +72,7 @@ export default function Contact(props) {
 								Contact
 							</h1>
 							<p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">
-								Via ce formulaire, vous pouvez directement poser
-								un rendez-vous ou tout simplement disucter avec
-								moi.
+								Via ce formulaire, vous prendre contact avec moi pour tout besoin de renseignements complémentaire.
 							</p>
 						</div>
 					</div>
