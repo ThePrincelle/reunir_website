@@ -124,10 +124,12 @@ export default function ContactForm(props) {
 					  " (" +
 					  sMarche.lieu.address.split(", ").slice(0, -2).join(", ") +
 					  ") - " +
-					  new Date(sMarche.date).toLocaleDateString(
-							"fr-FR",
-							dateOptions
-					  ) +
+					  (sMarche.recurrence
+							? (sMarche.recurrence + " à")
+							: new Date(sMarche.date).toLocaleDateString(
+									"fr-FR",
+									dateOptions
+							  )) +
 					  " " +
 					  sMarche.heure
 				: "Aucune séance sélectionnée.";
@@ -317,10 +319,14 @@ export default function ContactForm(props) {
 											.slice(0, -2)
 											.join(", ") +
 									  ") - " +
-									  new Date(event.date).toLocaleDateString(
-											"fr-FR",
-											dateOptions
-									  ) +
+									  (event.recurrence
+											? (event.recurrence + " à")
+											: new Date(
+													event.date
+											  ).toLocaleDateString(
+													"fr-FR",
+													dateOptions
+											  )) +
 									  " " +
 									  event.heure}
 							</option>
