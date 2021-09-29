@@ -247,6 +247,9 @@ export default function Contact(props) {
 									<h3 className="text-lg font-medium text-white">
 										Informations de contact
 									</h3>
+									<h4 className="text-md pt-2 text-white">
+										Audrey Bauerlé
+									</h4>
 									<dl className="mt-8 space-y-6">
 										<dt>
 											<span className="sr-only">
