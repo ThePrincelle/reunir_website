@@ -127,14 +127,25 @@ export default function Event(props) {
 						<div className="flex flex-row align-middle items-center space-x-3">
 							<CalendarIcon className="w-6 h-7" />
 							<div>
-								<p className="text-sm font-medium text-gray-900">
-									{new Date(
-										props.event.date
-									).toLocaleDateString("fr-FR", dateOptions)}
-								</p>
-								<div className="flex space-x-1 text-sm text-gray-500">
-									<span>{props.event.heure}</span>
-								</div>
+								{props.event.recurrence ? (
+									<p className="text-sm font-medium text-gray-900">
+										{props.event.recurrence}
+									</p>
+								) : (
+									<div>
+										<p className="text-sm font-medium text-gray-900">
+											{new Date(
+												props.event.date
+											).toLocaleDateString(
+												"fr-FR",
+												dateOptions
+											)}
+										</p>
+										<div className="flex space-x-1 text-sm text-gray-500">
+											<span>{props.event.heure}</span>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 						<div className="flex flex-row align-middle items-center space-x-3">
