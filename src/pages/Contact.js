@@ -72,7 +72,9 @@ export default function Contact(props) {
 								Contact
 							</h1>
 							<p className="mt-6 text-xl text-warm-gray-500 max-w-3xl">
-								Via ce formulaire, vous prendre contact avec moi pour tout besoin de renseignements complémentaire.
+								Via ce formulaire, vous pouvez prendre contact
+								avec moi pour tout besoin de renseignements
+								complémentaires.
 							</p>
 						</div>
 					</div>
@@ -373,7 +375,9 @@ export default function Contact(props) {
 									<h3 className="text-lg font-medium text-warm-gray-900">
 										M'envoyer un message
 									</h3>
-									<ContactForm setMessageStatus={setMessageStatus} />
+									<ContactForm
+										setMessageStatus={setMessageStatus}
+									/>
 								</div>
 							</div>
 						</div>

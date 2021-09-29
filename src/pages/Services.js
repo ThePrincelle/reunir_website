@@ -91,16 +91,18 @@ export default function Services(props) {
 										// service.redirect && history.push(service.redirect)
 									}}
 								>
-									<div className="flex-shrink-0 object-cover">
-										<img
-											className="h-48 w-full object-cover bg-gray-100"
-											src={
-												"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=400&h=180&f[brighten]=10&o=true&src=" +
-												service.image.path
-											}
-											alt=""
-										/>
-									</div>
+									{(service.image && 'path' in service.image)  && (
+										<div className="flex-shrink-0 object-cover">
+											<img
+												className="h-48 w-full object-cover bg-gray-100"
+												src={
+													"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=400&h=180&f[brighten]=10&o=true&src=" +
+													service.image.path
+												}
+												alt=""
+											/>
+										</div>
+									)}
 									<div className="flex-1 bg-white p-6 flex flex-col justify-between">
 										<div className="flex-1 pb-5">
 											<p className="text-sm font-medium text-green-600">
@@ -176,18 +178,26 @@ export default function Services(props) {
 											</div>
 										)}
 										<div className="mt-4 flex items-center">
-											<div className="flex-shrink-0">
-												<span className="sr-only">
-													{service.prix}
-												</span>
-											</div>
-											<div className="">
-												<p className="text-sm font-medium text-gray-900">
-													{service.prix}
-												</p>
-												<div className="flex space-x-1 text-sm text-gray-500">
-													<span>{service.duree}</span>
+											{service.prix && (
+												<div className="flex-shrink-0">
+													<span className="sr-only">
+														{service.prix}
+													</span>
 												</div>
+											)}
+											<div className="">
+												{service.prix && (
+													<p className="text-sm font-medium text-gray-900">
+														{service.prix}
+													</p>
+												)}
+												{service.duree && (
+													<div className="flex space-x-1 text-sm text-gray-500">
+														<span>
+															{service.duree}
+														</span>
+													</div>
+												)}
 											</div>
 											<div className="ml-auto align-center flex">
 												<Link to="/contact">
