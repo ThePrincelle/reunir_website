@@ -128,9 +128,14 @@ export default function Event(props) {
 							<CalendarIcon className="w-6 h-7" />
 							<div>
 								{props.event.recurrence ? (
-									<p className="text-sm font-medium text-gray-900">
-										{props.event.recurrence}
-									</p>
+									<div>
+										<p className="text-sm font-medium text-gray-900">
+											{props.event.recurrence}
+										</p>
+										<div className="flex space-x-1 text-sm text-gray-500">
+											<span>{props.event.heure}</span>
+										</div>
+									</div>
 								) : (
 									<div>
 										<p className="text-sm font-medium text-gray-900">
