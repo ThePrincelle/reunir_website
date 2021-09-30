@@ -128,7 +128,7 @@ export default function Services(props) {
 												{service.titre}
 											</p>
 											<div
-												className="mt-3 text-base text-gray-500 space-y-2"
+												className="mt-3 text-base prose prose-yellow text-gray-500 space-y-2"
 												dangerouslySetInnerHTML={{
 													__html: DOMPurify.sanitize(
 														service.description_courte
