@@ -133,7 +133,7 @@ export default function Contact(props) {
 
 							<div className="grid grid-cols-1 lg:grid-cols-3">
 								{/* Contact information */}
-								<div className="relative overflow-hidden py-10 px-5 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
+								<div className="relative overflow-hidden py-10 px-5 bg-gradient-to-b from-coolgray-500 to-coolgray-600 sm:px-10 xl:p-12">
 									{/* Decorative angle backgrounds */}
 									<div
 										className="absolute inset-0 pointer-events-none sm:hidden"
@@ -258,9 +258,9 @@ export default function Contact(props) {
 												Téléphone
 											</span>
 										</dt>
-										<dd className="flex text-base text-teal-50">
+										<dd className="flex text-base text-coolgray-50">
 											<PhoneIcon
-												className="flex-shrink-0 w-6 h-6 text-teal-200"
+												className="flex-shrink-0 w-6 h-6 text-coolgray-200"
 												aria-hidden="true"
 											/>
 											<span className="ml-3">
@@ -281,9 +281,9 @@ export default function Contact(props) {
 												Email
 											</span>
 										</dt>
-										<dd className="flex text-base text-teal-50">
+										<dd className="flex text-base text-coolgray-50">
 											<MailIcon
-												className="flex-shrink-0 w-6 h-6 text-teal-200"
+												className="flex-shrink-0 w-6 h-6 text-coolgray-200"
 												aria-hidden="true"
 											/>
 											<span className="ml-3">
@@ -301,9 +301,9 @@ export default function Contact(props) {
 												Adresse
 											</span>
 										</dt>
-										<dd className="flex text-base text-teal-50">
+										<dd className="flex text-base text-coolgray-50">
 											<LocationMarkerIcon
-												className="flex-shrink-0 w-6 h-6 text-teal-200"
+												className="flex-shrink-0 w-6 h-6 text-coolgray-200"
 												aria-hidden="true"
 											/>
 											<span className="ml-3">
@@ -325,7 +325,7 @@ export default function Contact(props) {
 									>
 										<li>
 											<a
-												className="text-teal-200 hover:text-teal-100 transition-colors"
+												className="text-coolgray-200 hover:text-coolgray-100 transition-colors"
 												href={urlFacebook}
 											>
 												<span className="sr-only">
@@ -347,7 +347,7 @@ export default function Contact(props) {
 										</li>
 										<li>
 											<a
-												className="text-teal-200 hover:text-teal-100 transition-colors"
+												className="text-coolgray-200 hover:text-coolgray-100 transition-colors"
 												href={urlInstagram}
 											>
 												<span className="sr-only">

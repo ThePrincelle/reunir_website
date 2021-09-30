@@ -13,7 +13,8 @@ module.exports = {
             },
             colors: {
                 'warm-gray': colors.warmGray,
-                teal: colors.coolGray,
+                coolgray: colors.coolGray,
+                green: colors.teal
             },
         },
     },
