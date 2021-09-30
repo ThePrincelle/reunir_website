@@ -6,7 +6,7 @@ import DOMPurify from "dompurify";
 
 import { Link, useHistory } from "react-router-dom";
 
-import { getCollection } from "../cms";
+import { getCollection, getSingleton } from "../cms";
 
 import Tabs from "../components/Tabs";
 import ServicesDetails from "../components/ServiceDetails";
@@ -16,6 +16,7 @@ export default function Services(props) {
 	let [details, setDetails] = useState(false);
 	let [currentTab, setCurrentTab] = useState("Particuliers");
 	let [tabs, setTabs] = useState([]);
+	let [assetsServices, setAssetsServices] = useState(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -40,6 +41,11 @@ export default function Services(props) {
 					][0]
 				);
 				props.loader(false);
+			})
+			.catch((err) => console.error(err));
+		getSingleton("services")
+			.then((data) => {
+				setAssetsServices(data);
 			})
 			.catch((err) => console.error(err));
 	}, []);
@@ -77,6 +83,16 @@ export default function Services(props) {
 						setCurrentTab={setTab}
 					/>
 				)}
+				{(currentTab == "Professionnels" && assetsServices && assetsServices.image) && (
+					<img
+						className="h-32 sm:h-64 rounded-lg mt-8 w-full object-cover bg-gray-100"
+						src={
+							"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=crop&w=1300&h=400&f[brighten]=10&o=true&fp=top&src=" +
+							assetsServices.image.path
+						}
+						alt=""
+					/>
+				)}
 				<div className="mt-8 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 					{services.map(
 						(service) =>
@@ -91,7 +107,7 @@ export default function Services(props) {
 										// service.redirect && history.push(service.redirect)
 									}}
 								>
-									{(service.image && 'path' in service.image)  && (
+									{service.image && "path" in service.image && (
 										<div className="flex-shrink-0 object-cover">
 											<img
 												className="h-48 w-full object-cover bg-gray-100"
