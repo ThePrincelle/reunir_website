@@ -20,6 +20,7 @@ steps:
   commands:
   - yarn install
   - cp public/robots-prod.txt public/robots.txt
+  - rm public/robots-prod.txt public/robots-dev.txt
 
 - name: build
   image: node
@@ -107,6 +108,7 @@ steps:
   commands:
   - yarn install
   - cp public/robots-dev.txt public/robots.txt
+  - rm public/robots-prod.txt public/robots-dev.txt
 
 - name: build
   image: node
