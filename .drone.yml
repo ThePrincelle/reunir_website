@@ -2,6 +2,9 @@ kind: pipeline
 type: docker
 name: deploy prod
 
+concurrency:
+  limit: 1
+
 steps:
 - name: notify build start
   image: plugins/webhook
@@ -89,6 +92,9 @@ trigger:
 kind: pipeline
 type: docker
 name: deploy dev
+
+concurrency:
+  limit: 1
 
 steps:
 - name: notify build start
