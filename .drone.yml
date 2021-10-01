@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: deploy
+name: deploy prod
 
 steps:
 - name: notify build start
@@ -37,7 +37,93 @@ steps:
         "message": "Mise en production de 're-unir.fr'."
       }
 
-- name: cleaning
+- name: cleaning prod
+  image: appleboy/drone-ssh
+  settings:
+    host: 464i8.ftp.infomaniak.com
+    username: 464i8_ci
+    port: 22
+    key:
+      from_secret: SSH_KEY
+    script:
+      - echo "Cleaning Folder..."
+      - cd
+      - cd sites/clients/reunir/prod
+      - rm -rf ./*
+      - echo "Folder cleaned"
+      - exit
+
+- name: deploy prod
+  image: drillster/drone-rsync
+  settings:
+    hosts: [ "464i8.ftp.infomaniak.com" ]
+    user: 464i8_ci
+    key:
+      from_secret: SSH_KEY
+    recursive: true
+    source: ./build/
+    target: ~/sites/clients/reunir/prod
+    script:
+      - echo "Done"
+      - exit
+
+- name: notify deploy done
+  image: plugins/webhook
+  settings:
+    urls: https://api.pushover.net/1/messages.json
+    content_type: application/json
+    template: |
+      {
+        "token": "a3arkn5phqihc15auh7ikayxr5yiub",
+        "user": "ubb25dk7snjn9hri5137moi3q5k53a",
+        "message": "L'application 're-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+      }
+
+trigger:
+  branch:
+  - main
+
+---
+kind: pipeline
+type: docker
+name: deploy dev
+
+steps:
+- name: notify build start
+  image: plugins/webhook
+  settings:
+    urls: https://api.pushover.net/1/messages.json
+    content_type: application/json
+    template: |
+      {
+        "token": "a3arkn5phqihc15auh7ikayxr5yiub",
+        "user": "ubb25dk7snjn9hri5137moi3q5k53a",
+        "message": "Démarrage du build pour 'dev.re-unir.fr'."
+      }
+
+- name: install
+  image: node
+  commands:
+  - yarn install
+
+- name: build
+  image: node
+  commands:
+  - yarn build
+
+- name: notify build done
+  image: plugins/webhook
+  settings:
+    urls: https://api.pushover.net/1/messages.json
+    content_type: application/json
+    template: |
+      {
+        "token": "a3arkn5phqihc15auh7ikayxr5yiub",
+        "user": "ubb25dk7snjn9hri5137moi3q5k53a",
+        "message": "Déploiement de 'dev.re-unir.fr'."
+      }
+
+- name: cleaning dev
   image: appleboy/drone-ssh
   settings:
     host: 464i8.ftp.infomaniak.com
@@ -53,7 +139,7 @@ steps:
       - echo "Folder cleaned"
       - exit
 
-- name: deploy
+- name: deploy dev
   image: drillster/drone-rsync
   settings:
     hosts: [ "464i8.ftp.infomaniak.com" ]
@@ -76,9 +162,9 @@ steps:
       {
         "token": "a3arkn5phqihc15auh7ikayxr5yiub",
         "user": "ubb25dk7snjn9hri5137moi3q5k53a",
-        "message": "L'application 're-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+        "message": "L'application (dev) 'dev.re-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
       }
 
 trigger:
   branch:
-  - main
+  - develop
