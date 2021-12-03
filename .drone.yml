@@ -20,6 +20,8 @@ steps:
 
 - name: install
   image: node
+  environment:
+    NODE_OPTIONS: --openssl-legacy-provider
   commands:
   - yarn install
   - cp public/robots-prod.txt public/robots.txt
@@ -27,6 +29,8 @@ steps:
 
 - name: build
   image: node
+  environment:
+    NODE_OPTIONS: --openssl-legacy-provider
   commands:
   - yarn build
 
