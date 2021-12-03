@@ -37,8 +37,14 @@ export default function ContactForm(props) {
 		if (selected.id == "psychamarche") {
 			getCollection("events")
 				.then((data) => {
+					// Filter event that are older than today
+					let today = new Date();
+					let events = data.entries.filter((event) => {
+						let eventDate = new Date(event.date);
+						return eventDate >= today || event.recurrence;
+					});
 					setPsychamarches(
-						data.entries
+						events
 							.filter((e) => e.published == true)
 							.concat([
 								{ _id: "question", text: "Autre question" },

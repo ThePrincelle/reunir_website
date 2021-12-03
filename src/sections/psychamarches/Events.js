@@ -14,7 +14,13 @@ export default function Events(props) {
 	useEffect(() => {
 		getCollection("events")
 			.then((data) => {
-				setEvents(data.entries);
+				// Filter event that are older than today
+				let today = new Date();
+				let events = data.entries.filter((event) => {
+					let eventDate = new Date(event.date);
+					return eventDate >= today || event.recurrence;
+				});
+				setEvents(events);
 			})
 			.catch((err) => console.error(err));
 	}, []);
