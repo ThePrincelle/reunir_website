@@ -62,7 +62,7 @@ jobs:
           server: '464i8.ftp.infomaniak.com'
           ssh_private_key: ${{ secrets.SSH_KEY }} 
           local_path: './build/*'
-          remote_path: '~/sites/clients/reunir/prod'
+          remote_path: './sites/clients/reunir/prod'
           
       - name: notify
         uses: jasongitmail/fast-webhook@v1.1.4
