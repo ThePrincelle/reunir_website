@@ -19,13 +19,15 @@ jobs:
           node-version: '17.x'
       
       - name: notify
-        uses: umahmood/pushover-actions@main
-        env:
-          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
-          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        uses: jasongitmail/fast-webhook@v1.1.4
         with:
-          title: 'Ré-Unir'
-          message: "Démarrage du build pour 'ré-unir.fr'."
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "Démarrage du build pour 'ré-unir.fr'."
+            }
 
       - name: install
         env:
@@ -41,35 +43,35 @@ jobs:
         env:
           NODE_OPTIONS: --openssl-legacy-provider
         run: yarn build
-        
-      - name: notify
-        uses: umahmood/pushover-actions@main
-        env:
-          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
-          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
-        with:
-          title: 'Ré-Unir'
-          message: "Mise en production de 'ré-unir.fr'."
           
-      - name: prepare_ssh_key
-        run: echo "${{ secrets.SSH_KEY }}" > ./private_key
+      - name: notify
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "Mise en production de 're-unir.fr'."
+            }
           
       - name: deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        uses: wangyucode/sftp-upload-action@v1.1
         with:
-          username: 464i8_ci
-          server: 464i8.ftp.infomaniak.com
+          host: 464i8.ftp.infomaniak.com
           port: 22
-          ssh_private_key: ./private_key
-          local_path: ./build/
-          remote_path: ~/sites/clients/reunir/prod
-        
+          username: 464i8_ci
+          password: ${{ secrets.SFTP_PASS }}
+          localDir: ./build/
+          remoteDir: ~/sites/clients/reunir/prod
+          
       - name: notify
-        uses: umahmood/pushover-actions@main
-        env:
-          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
-          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        uses: jasongitmail/fast-webhook@v1.1.4
         with:
-          title: 'Ré-Unir'
-          message: "L'application 'ré-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
-
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "L'application 'ré-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+            }
