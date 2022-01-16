@@ -51,13 +51,16 @@ jobs:
           title: 'Ré-Unir'
           message: "Mise en production de 'ré-unir.fr'."
           
+      - name: prepare_ssh_key
+        run: echo "${{ secrets.SSH_KEY }}" > ./private_key
+          
       - name: deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
           username: 464i8_ci
           server: 464i8.ftp.infomaniak.com
           port: 22
-          ssh_private_key: ${{ secrets.SSH_KEY }}
+          ssh_private_key: ./private_key
           local_path: ./build/
           remote_path: ~/sites/clients/reunir/prod
         
