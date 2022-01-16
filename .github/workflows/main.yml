@@ -56,14 +56,13 @@ jobs:
             }
           
       - name: deploy
-        uses: wangyucode/sftp-upload-action@v1.1
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          host: 464i8.ftp.infomaniak.com
-          port: 22
-          username: 464i8_ci
-          password: ${{ secrets.SFTP_PASS }}
-          localDir: ./build/
-          remoteDir: ~/sites/clients/reunir/prod
+          username: '464i8_ci'
+          server: '464i8.ftp.infomaniak.com'
+          ssh_private_key: ${{ secrets.SSH_KEY }} 
+          local_path: './build/*'
+          remote_path: '~/sites/clients/reunir/prod'
           
       - name: notify
         uses: jasongitmail/fast-webhook@v1.1.4
