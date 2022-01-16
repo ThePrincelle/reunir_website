@@ -1,0 +1,72 @@
+name: Deploy in Prod Env
+
+on:
+  push:
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '17.x'
+      
+      - name: notify
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        with:
+          title: 'Ré-Unir'
+          message: "Démarrage du build pour 'ré-unir.fr'."
+
+      - name: install
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: yarn install
+        
+      - name: configure
+        run: |
+          cp public/robots-prod.txt public/robots.txt
+          rm public/robots-prod.txt public/robots-dev.txt
+          
+      - name: build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: yarn build
+        
+      - name: notify
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        with:
+          title: 'Ré-Unir'
+          message: "Mise en production de 'ré-unir.fr'."
+          
+      - name: deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        with:
+          username: 464i8_ci
+          server: 464i8.ftp.infomaniak.com
+          port: 22
+          ssh_private_key: ${{ secrets.SSH_KEY }}
+          local_path: ./build/
+          remote_path: ~/sites/clients/reunir/prod
+        
+      - name: notify
+        uses: umahmood/pushover-actions@main
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        with:
+          title: 'Ré-Unir'
+          message: "L'application 'ré-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+
