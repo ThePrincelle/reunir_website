@@ -1,4 +1,4 @@
-name: Deploy in development env
+name: Staging deployment
 
 on:
   push:
