@@ -52,7 +52,7 @@ jobs:
             {
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
-              "message": "Mise en production de 're-unir.fr'."
+              "message": "Mise en production de 'ré-unir.fr'."
             }
           
       - name: deploy
