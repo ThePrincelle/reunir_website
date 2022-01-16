@@ -1,8 +1,8 @@
-name: Deploy in production env
+name: Deploy in development env
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
     
   workflow_dispatch:
 
@@ -26,7 +26,7 @@ jobs:
             {
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
-              "message": "Démarrage du build pour 'ré-unir.fr'."
+              "message": "Démarrage du build pour 'dev.re-unir.fr'."
             }
 
       - name: Install dependancies
@@ -36,7 +36,7 @@ jobs:
         
       - name: Configure robots.txt
         run: |
-          cp public/robots-prod.txt public/robots.txt
+          cp public/robots-dev.txt public/robots.txt
           rm public/robots-prod.txt public/robots-dev.txt
           
       - name: Build
@@ -52,7 +52,7 @@ jobs:
             {
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
-              "message": "Mise en production de 'ré-unir.fr'."
+              "message": "Mise en production de 'dev.re-unir.fr'."
             }
           
       - name: Deploy to Infomaniak
@@ -62,7 +62,7 @@ jobs:
           server: '464i8.ftp.infomaniak.com'
           ssh_private_key: ${{ secrets.SSH_KEY }} 
           local_path: './build/*'
-          remote_path: './sites/clients/reunir/prod'
+          remote_path: './sites/clients/reunir/dev'
           
       - name: Notify
         uses: jasongitmail/fast-webhook@v1.1.4
@@ -72,5 +72,5 @@ jobs:
             {
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
-              "message": "L'application 'ré-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+              "message": "L'application (dev) 'dev.re-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
             }
