@@ -28,7 +28,7 @@ export default function Home(props) {
                             </span>{' '}
                             <span className="block xl:inline"></span>
 							<span className="block xl:inline">
-                                <span>un espace de</span>{' '}
+                                <span>un espace dédié à la</span>{' '}
                                 <span className="text-green-600">parole</span>
 							    <span>.</span>
                             </span>

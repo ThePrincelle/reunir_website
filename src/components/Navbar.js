@@ -34,7 +34,7 @@ function Navbar(props) {
 								</Popover.Button>
 							</div>
 							<Link to="/" className="flex-shrink-0 flex items-center">
-								<h1 className="text-2xl font-bold antialiased text-green-700">Ré-Unir</h1>
+								<h1 className="text-2xl font-bold antialiased text-green-700">Ré-Unir<span className="hidden sm:inline-block text-gray-900">, un espace dédié à la <span className="text-green-600">parole</span>.</span></h1>
 							</Link>
 							<div className="hidden md:ml-6 md:flex md:space-x-8">
 								{props.routes.map(route => {
