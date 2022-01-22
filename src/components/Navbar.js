@@ -21,7 +21,7 @@ function Navbar(props) {
 			{({ open }) => (
 				<>
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-						<div className="flex justify-between h-16 full-width sm:flex-row flex-row-reverse">
+						<div className="flex justify-between h-16 full-width flex-row-reverse md:flex-row">
 							<div className="-ml-2 mr-2 flex items-center md:hidden">
 								{/* Mobile menu button */}
 								<Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500 transition-colors">
@@ -36,7 +36,7 @@ function Navbar(props) {
 							<Link to="/" className="flex-shrink-0 flex items-center">
 								<h1 className="text-2xl font-bold antialiased text-green-700">Ré-Unir<span className="hidden sm:inline-block text-gray-900">, un espace dédié à la <span className="text-green-600">parole</span>.</span></h1>
 							</Link>
-							<div className="hidden md:ml-6 md:flex md:space-x-8">
+							<div className="hidden md:ml-6 md:flex md:space-x-7">
 								{props.routes.map(route => {
 									return <Link
 										key={route.id}
