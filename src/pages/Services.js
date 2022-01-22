@@ -72,7 +72,7 @@ export default function Services(props) {
 					<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
 						Services
 					</h2>
-					<p className="mt-3 max-w-2xl mx-auto text-md sm:text-lg text-gray-500 sm:mt-4">
+					<p className="hidden sm:inline-block mt-3 max-w-2xl mx-auto text-md sm:text-lg text-gray-500 sm:mt-4">
 						Vous trouverez ici la liste des services que je propose.
 					</p>
 				</div>
