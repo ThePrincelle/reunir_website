@@ -52,7 +52,7 @@ jobs:
             {
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
-              "message": "Mise en production de 'dev.re-unir.fr'."
+              "message": "Déploiement de 'dev.re-unir.fr'."
             }
           
       - name: Deploy to Infomaniak
