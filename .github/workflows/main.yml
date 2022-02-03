@@ -56,14 +56,15 @@ jobs:
             }
           
       - name: Deploy to Infomaniak
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
-        with:
-          username: '464i8_ci'
-          server: '464i8.ftp.infomaniak.com'
-          ssh_private_key: ${{ secrets.SSH_KEY }} 
-          local_path: './build/*'
-          remote_path: './sites/clients/reunir/prod'
-          
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "build/"
+          REMOTE_HOST: 464i8.ftp.infomaniak.com
+          REMOTE_USER: 464i8_ci
+          TARGET: /home/clients/04cd6fa9bfb5342793851e99c0041e14/sites/clients/reunir/prod
+
       - name: Notify
         uses: jasongitmail/fast-webhook@v1.1.4
         with:
