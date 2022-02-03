@@ -65,7 +65,7 @@ jobs:
           REMOTE_USER: 464i8_ci
           TARGET: /home/clients/04cd6fa9bfb5342793851e99c0041e14/sites/clients/reunir/dev
           
-      - name: Notify
+      - name: Notify on success
         uses: jasongitmail/fast-webhook@v1.1.4
         with:
           url: https://api.pushover.net/1/messages.json
@@ -74,4 +74,16 @@ jobs:
               "token": "${{ secrets.PUSHOVER_TOKEN }}",
               "user": "${{ secrets.PUSHOVER_USER }}",
               "message": "L'application (dev) 'dev.re-unir.fr' a bien été déployée sur l'infrastructure Infomaniak."
+            }
+
+      - name: Notify on failure
+        if: ${{ failure() }}
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "Erreur lors du déploiement de 'dev.re-unir.fr' sur l'infrastructure Infomaniak."
             }
