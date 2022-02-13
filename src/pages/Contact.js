@@ -6,6 +6,8 @@ import {
 	PhoneIcon,
 } from "@heroicons/react/outline";
 
+import { Link } from "react-router-dom";
+
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import L from "leaflet";
@@ -390,6 +392,10 @@ export default function Contact(props) {
 									<h3 className="text-lg font-medium text-warm-gray-900">
 										M'envoyer un message
 									</h3>
+									<div className="w-full text-xs text-gray-400 pt-1 flex flex-col">
+										<span>Les données transmises via ce formulaire sont transmises via un canal sécurisé, ne sont transmises à aucun tiers et ne seront utilisées qu’à des fins de réponses.</span>
+										<span>Pour en savoir plus sur la gestion des données sur ce site, consultez la page : <Link to="/legal" className="text-yellow-500 hover:text-yellow-600 hover:underline">Mentions Légales</Link>.</span>
+									</div>
 									<ContactForm
 										setMessageStatus={setMessageStatus}
 									/>

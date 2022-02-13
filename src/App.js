@@ -17,6 +17,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Psychamarche from "./pages/Psychamarche";
 import Contact from "./pages/Contact";
+import Legal from "./pages/Legal";
 
 function App() {
 	const routes = [
@@ -55,6 +56,14 @@ function App() {
 			exact: false,
 			component: Contact,
 		},
+		{
+			id: "legal",
+			name: "Mentions légales",
+			path: "/legal",
+			exact: false,
+			disableMainNav: true,
+			component: Legal,
+		}
 	];
 
 	let [loading, setLoading] = useState(true);
@@ -79,7 +88,6 @@ function App() {
 							<route.component loader={setLoaded} />
 						</Route>
 					))}
-
 					<Redirect to="/" />
 				</Switch>
 
