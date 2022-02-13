@@ -38,13 +38,13 @@ function Navbar(props) {
 							</Link>
 							<div className="hidden md:ml-6 md:flex md:space-x-7">
 								{props.routes.map(route => {
-									return <Link
+									return (route.disableMainNav != true && <Link
 										key={route.id}
 										to={route.path}
 										className={props.location.pathname === route.path ? linkActive : linkNotActive}
 									>
 										{route.name}
-									</Link>
+									</Link>)
 							})}
 							</div>
 						</div>
@@ -61,13 +61,13 @@ function Navbar(props) {
 					<Popover.Panel className="md:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{props.routes.map(route => {
-								return <Link
+								return (route.disableMainNav != true && <Link
 									key={route.id}
 									to={route.path}
 									className={props.location.pathname === route.path ? linkActiveMobile : linkNotActiveMobile}
 								>
 									{route.name}
-								</Link>
+								</Link>)
 							})}
 						</div>
 					</Popover.Panel>
