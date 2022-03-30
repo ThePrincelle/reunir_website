@@ -8,9 +8,10 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
 
 const objects = [
-	{ id: "autre", name: "Autre" },
-	{ id: "rdv", name: "Demande de rendez-vous" },
-	{ id: "psychamarche", name: "Demande de participation à une psychamarche" },
+	{ idx: 0, id: "autre", name: "Autre" },
+	{ idx: 1, id: "rdv", name: "Demande de rendez-vous" },
+	{ idx: 2, id: "rdv", name: "Inscription pour une activité" },
+	{ idx: 3, id: "psychamarche", name: "Demande de participation à une psychamarche" },
 ];
 
 function classNames(...classes) {
@@ -281,10 +282,9 @@ export default function ContactForm(props) {
 						)
 					}
 					className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
-					defaultValue={selected}
 				>
 					{objects.map((object) => (
-						<option key={object.id} value={object.id}>
+						<option key={object.idx} value={object.id}>
 							{object.name}
 						</option>
 					))}
