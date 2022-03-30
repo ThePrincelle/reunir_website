@@ -48,7 +48,7 @@ export default function ServicesDetails(props) {
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
 						<div className="inline-block align-bottom bg-white rounded-lg px-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-16 sm:align-middle sm:max-w-lg sm:w-full p-5 sm:p-6">
-							{(props.service.image && 'path' in props.service.image) && (
+							{(props.service.image && 'path' in props.service.image) && (
 								<img
 									className="flex-shrink-0 rounded-t-lg absolute inset-0 h-48 w-full min-w-full object-cover"
 									src={
@@ -68,7 +68,7 @@ export default function ServicesDetails(props) {
 											{props.service.titre}
 										</p>
 										<div
-											className="flex-row space-between pb-1 mt-3 overflow-y text-base text-gray-500 space-y-2"
+											className="flex-row space-between pb-1 mt-3 overflow-y text-base text-gray-500 space-y-2 prose prose-yellow"
 											dangerouslySetInnerHTML={{
 												__html: DOMPurify.sanitize(
 													props.service
