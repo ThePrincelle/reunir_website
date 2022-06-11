@@ -6,7 +6,7 @@ import DOMPurify from "dompurify";
 
 import { Link, useHistory } from "react-router-dom";
 
-import { getCollection, getSingleton } from "../cms";
+import { getCollection } from "../cms";
 
 import Tabs from "../components/Tabs";
 import ServicesDetails from "../components/ServiceDetails";
@@ -19,7 +19,6 @@ export default function Services(props) {
 	let [paymentsModal, setPaymentModal] = useState(false);
 	let [currentTab, setCurrentTab] = useState("Particuliers");
 	let [tabs, setTabs] = useState([]);
-	// let [assetsServices, setAssetsServices] = useState(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -46,11 +45,6 @@ export default function Services(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
-		// getSingleton("services")
-		// 	.then((data) => {
-		// 		setAssetsServices(data);
-		// 	})
-		// 	.catch((err) => console.error(err));
 	}, []);
 
 	let closeDetails = () => {
@@ -74,6 +68,9 @@ export default function Services(props) {
 	return (
 		<div className="bg-warm-gray-50 relative px-4 sm:px-6 lg:px-8">
 			<div className="pt-16 lg:pt-24">
+				<div className="absolute inset-0 z-0">
+					<div className="bg-white h-1/4 sm:h-2/4" />
+				</div>
 				<div className="relative max-w-7xl mx-auto">
 					<div className="text-center">
 						<h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
@@ -277,9 +274,9 @@ export default function Services(props) {
 								)
 						)}
 					</div>
-				</div>
-				<div className="pb-10 pt-10">
+				<div className="pb-10 pt-10 z-10">
 					<Teleconsulting setPaymentModal={setPaymentModal} />
+				</div>
 				</div>
 			</div>
 			{details && (

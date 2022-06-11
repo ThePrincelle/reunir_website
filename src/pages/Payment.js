@@ -147,8 +147,9 @@ export default function Payment(props) {
 						<div className="relative text-center mx-auto max-w-md mt-10">
 							<figure>
 								<div className="aspect-w-4 aspect-h-4">
+                                    <a href={texts.paypal_link} target="_blank">
 									<img
-										className="rounded-lg shadow-lg object-cover object-center"
+										className="rounded-lg shadow-lg hover:shadow-xl transition-shadow object-cover object-center"
 										src={
 											"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1000&h=1000&o=true&src=" +
 											texts.paypal_qrcode.path
@@ -156,7 +157,7 @@ export default function Payment(props) {
 										alt={texts.paypal_link}
 										width={500}
 										height={500}
-									/>
+									/></a>
 								</div>
 								{texts.paypal_link != "" && (
 									<figcaption className="mt-3 flex text-sm text-green-600 hover:text-green-800">
@@ -167,7 +168,7 @@ export default function Payment(props) {
 										<a
 											href={texts.paypal_link}
 											target="_blank"
-											className="ml-2 "
+											className="ml-2"
 										>
 											{texts.paypal_link}
 										</a>

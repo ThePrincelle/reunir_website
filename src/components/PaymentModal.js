@@ -81,8 +81,9 @@ export default function PaymentModal(props) {
 												<div className="relative text-center mx-auto max-w-prose lg:max-w-none">
 													<figure>
 														<div className="aspect-w-4 aspect-h-4">
+                              <a href={texts.paypal_link} target="_blank">
 															<img
-																className="rounded-lg shadow-lg object-cover object-center"
+																className="rounded-lg shadow-lg hover:shadow-xl transition-shadow object-cover object-center"
 																src={
 																	"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1000&h=1000&o=true&src=" +
 																	texts
@@ -95,6 +96,7 @@ export default function PaymentModal(props) {
 																width={500}
 																height={500}
 															/>
+                              </a>
 														</div>
 														{texts.paypal_link !=
 															"" && (

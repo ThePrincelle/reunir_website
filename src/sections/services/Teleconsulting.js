@@ -21,7 +21,7 @@ export default function Teleconsulting(props) {
 	}, []);
 
 	return (
-		<div className="bg-gray-50">
+		<div className="">
 			<div className="max-w-7xl mx-auto py-12 px-0 sm:px-6 lg:py-16 lg:px-8 lg:flex-row lg:justify-between">
 				<h2 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
 					<span className="block">{subtitle}</span>
