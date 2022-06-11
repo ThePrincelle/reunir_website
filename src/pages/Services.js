@@ -66,7 +66,7 @@ export default function Services(props) {
 	let history = useHistory();
 
 	return (
-		<div className="bg-warm-gray-50 relative px-4 sm:px-6 lg:px-8">
+		<div className="bg-gray-50 relative px-4 sm:px-6 lg:px-8">
 			<div className="pt-16 lg:pt-24">
 				<div className="absolute inset-0 z-0">
 					<div className="bg-white h-1/4 sm:h-2/4" />
