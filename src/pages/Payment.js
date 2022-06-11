@@ -132,7 +132,7 @@ export default function Payment(props) {
 							{/* <span className="block text-base text-center text-green-600 font-semibold tracking-wide uppercase">
 								{texts.subtitle}
 							</span> */}
-							<span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+							<span className="block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
 								{texts.title}
 							</span>
 						</h1>
