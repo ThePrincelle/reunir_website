@@ -21,8 +21,8 @@ function Navbar(props) {
 			{({ open }) => (
 				<>
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-						<div className="flex justify-between h-16 full-width flex-row-reverse md:flex-row">
-							<div className="-ml-2 mr-2 flex items-center md:hidden">
+						<div className="flex justify-between h-16 full-width flex-row-reverse lg:flex-row">
+							<div className="-ml-2 mr-2 flex items-center lg:hidden">
 								{/* Mobile menu button */}
 								<Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500 transition-colors">
 									<span className="sr-only">Open main menu</span>
@@ -36,7 +36,7 @@ function Navbar(props) {
 							<Link to="/" className="flex-shrink-0 flex items-center">
 								<h1 className="text-2xl font-bold antialiased text-green-700">Ré-Unir<span className="hidden sm:inline-block text-gray-900">, un espace dédié à la <span className="text-green-600">parole</span>.</span></h1>
 							</Link>
-							<div className="hidden md:ml-6 md:flex md:space-x-7">
+							<div className="hidden lg:ml-6 lg:flex lg:space-x-7">
 								{props.routes.map(route => {
 									return (route.disableMainNav != true && <Link
 										key={route.id}
@@ -58,7 +58,7 @@ function Navbar(props) {
 						leaveFrom="opacity-100 scale-100"
 						leaveTo="opacity-0 scale-95"
 					>
-					<Popover.Panel className="md:hidden">
+					<Popover.Panel className="lg:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{props.routes.map(route => {
 								return (route.disableMainNav != true && <Link
