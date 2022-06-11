@@ -83,7 +83,7 @@ export default function Services(props) {
 						setCurrentTab={setTab}
 					/>
 				)}
-				{(currentTab == "Professionnels" && assetsServices && assetsServices.image) && (
+				{/*(currentTab == "Professionnels" && assetsServices && assetsServices.image) && (
 					<img
 						className="h-32 sm:h-64 rounded-lg mt-8 w-full object-cover bg-gray-100"
 						src={
@@ -92,7 +92,7 @@ export default function Services(props) {
 						}
 						alt=""
 					/>
-				)}
+					)*/}
 				<div className="mt-8 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 					{services.map(
 						(service) =>
