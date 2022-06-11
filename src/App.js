@@ -18,6 +18,7 @@ import Services from "./pages/Services";
 import Psychamarche from "./pages/Psychamarche";
 import Contact from "./pages/Contact";
 import Legal from "./pages/Legal";
+import Payment from "./pages/Payment";
 
 function App() {
 	const routes = [
@@ -55,6 +56,14 @@ function App() {
 			path: "/contact",
 			exact: false,
 			component: Contact,
+		},
+		{
+			id: "payment",
+			name: "Paiement",
+			path: "/payment",
+			exact: false,
+			disableMainNav: true,
+			component: Payment,
 		},
 		{
 			id: "legal",
