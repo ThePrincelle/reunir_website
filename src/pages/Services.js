@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { PlusSmIcon as PlusSmIconSolid } from "@heroicons/react/solid";
+import { PlusSmIcon as PlusSmIconSolid, DocumentDownloadIcon } from "@heroicons/react/solid";
 
 import DOMPurify from "dompurify";
 
@@ -61,6 +61,13 @@ export default function Services(props) {
 
 	let setTab = (tab) => {
 		setCurrentTab(tab);
+	};
+
+	let downloadForm = (service) => {
+		let url = `https://cms.re-unir.fr/${service.formulaire}`
+
+		// Download file at URL
+		window.open(url, '_blank');
 	};
 
 	let history = useHistory();
@@ -172,6 +179,23 @@ export default function Services(props) {
 													</div>
 												)}
 											</div>
+											{service.formulaire && (
+												<button 
+													type="button" 
+													onClick={() =>
+														downloadForm(
+															service
+														)
+													}
+													class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 w-full justify-center"
+													>
+												<DocumentDownloadIcon
+														className="-ml-1 mr-2 h-5 w-5"
+														aria-hidden="true"
+													/>
+												Télécharger le formulaire d'inscription
+												</button>
+											)}
 											{(service.duree_details ||
 												service.prix_details) && (
 												<div className="pt-3">
