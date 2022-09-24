@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { CameraIcon } from "@heroicons/react/solid";
 
-import { ChevronRightIcon, HomeIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon, HomeIcon, DocumentDownloadIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 
 import DOMPurify from "dompurify";
@@ -32,6 +32,12 @@ export default function Psychamarche(props) {
 			})
 			.catch((err) => console.error(err));
 	}, []);
+
+	let downloadForm = () => {
+		let url = `https://cms.re-unir.fr/${content.formulaire}`
+		// Download file at URL
+		window.open(url, '_blank');
+	}
 
 	return (
 		<div className="bg-white overflow-hidden">
@@ -105,6 +111,21 @@ export default function Psychamarche(props) {
 								</span>
 							</button>
 						</HashLink>
+						<button
+							type="button"
+							onClick={() =>
+								downloadForm()
+							}
+							className="inline-flex ml-4 mt-4 items-center p-1.5 border border-transparent rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 space-x-1"
+						>
+							<DocumentDownloadIcon
+								className="h-6 w-6"
+								aria-hidden="true"
+							/>
+							<span className="text-sm font-medium pr-1">
+								Télécharger le formulaire d'inscription
+							</span>
+						</button>
 					</div>
 				</div>
 				{content && (

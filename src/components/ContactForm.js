@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import { getCollection, sendForm } from "../cms";
 
+import { DocumentDownloadIcon } from "@heroicons/react/solid";
+
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
@@ -11,7 +13,7 @@ const objects = [
 	{ idx: 0, id: "autre", name: "Autre" },
 	{ idx: 1, id: "rdv", name: "Demande de rendez-vous" },
 	{ idx: 2, id: "rdv", name: "Inscription pour une activité" },
-	{ idx: 3, id: "psychamarche", name: "Demande de participation à une psychamarche" },
+	//{ idx: 3, id: "psychamarche", name: "Demande de participation à une psychamarche" },
 ];
 
 function classNames(...classes) {
@@ -373,6 +375,23 @@ export default function ContactForm(props) {
 						))}
 					</select>
 				</div>
+			)}
+			{sService && sService.formulaire && (
+				<button 
+					type="button" 
+					onClick={() =>
+						downloadForm(
+							service
+						)
+					}
+					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 justify-center sm:w-full"
+					>
+				<DocumentDownloadIcon
+						className="-ml-1 mr-2 h-5 w-5"
+						aria-hidden="true"
+					/>
+				<span>Télécharger le formulaire d'inscription</span>
+				</button>
 			)}
 			<div className="sm:col-span-2">
 				<label
