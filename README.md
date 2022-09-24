@@ -4,8 +4,6 @@ Made with React and TailwindCSS.
 
 https://re-unir.fr
 
-Hosted by Infomaniak.
+Hosted by Cloudflare Pages.
 
-[![Deployment Prod Status](https://github.com/ThePrincelle/reunir_website/actions/workflows/main.yml/badge.svg)](https://github.com/ThePrincelle/reunir_website/actions/workflows/main.yml)
-
-[![Deployment Staging Status](https://github.com/ThePrincelle/reunir_website/actions/workflows/develop.yml/badge.svg)](https://github.com/ThePrincelle/reunir_website/actions/workflows/develop.yml)
+[![Build test](https://github.com/ThePrincelle/reunir_website/actions/workflows/test.yml/badge.svg)](https://github.com/ThePrincelle/reunir_website/actions/workflows/test.yml)
