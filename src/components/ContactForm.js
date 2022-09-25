@@ -167,6 +167,13 @@ export default function ContactForm(props) {
 		setsService(null);
 	};
 
+	let downloadForm = (service) => {
+		let url = `https://cms.re-unir.fr/${service.formulaire}`
+
+		// Download file at URL
+		window.open(url, '_blank');
+	};
+
 	return (
 		<form
 			id="contact-form"
@@ -381,7 +388,7 @@ export default function ContactForm(props) {
 					type="button" 
 					onClick={() =>
 						downloadForm(
-							service
+							sService
 						)
 					}
 					class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 justify-center sm:w-full"
