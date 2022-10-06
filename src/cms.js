@@ -51,8 +51,6 @@ export function sendForm(name, data) {
 }
 
 export function downloadAsset(entry) {
-    console.log('downloadAsset', entry);
-
 	// entry contains path and filename, download the file
 	let url = `${BASE_URL}/storage/uploads${entry.path}`;
 

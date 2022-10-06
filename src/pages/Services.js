@@ -63,7 +63,13 @@ export default function Services(props) {
 		setCurrentTab(tab);
 	};
 
-	let downloadForm = (service) => {
+	let displayDetails = (e, service) => {
+		e.stopPropagation();
+		setDetails(service);
+	};
+
+	let downloadForm = (e, service) => {
+		e.stopPropagation();
 		downloadAsset(service.form);
 	};
 
@@ -109,9 +115,9 @@ export default function Services(props) {
 									<div
 										key={service.titre}
 										className="flex flex-col rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
-										onClick={() => {
+										onClick={(e) => {
 											service.description_detaillee &&
-												setDetails(service);
+											displayDetails(e, service);
 											// service.redirect && history.push(service.redirect)
 										}}
 									>
@@ -179,9 +185,9 @@ export default function Services(props) {
 											{service.form && (
 												<button 
 													type="button" 
-													onClick={() =>
+													onClick={(e) =>
 														downloadForm(
-															service
+															e, service
 														)
 													}
 													className="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 w-full justify-center"
