@@ -76,6 +76,7 @@ export function downloadAsset(entry) {
 			);
 			const link = document.createElement("a");
 			link.href = url;
+            link.target = "_blank";
 			link.setAttribute(
 				"download",
 				entry.title
