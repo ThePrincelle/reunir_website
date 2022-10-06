@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 
 import DOMPurify from "dompurify";
 
+import { downloadAsset } from "../cms";
+
 export default function ServicesDetails(props) {
 	const [open, setOpen] = useState(true);
 
 	let downloadForm = (service) => {
-		let url = `https://cms.re-unir.fr/${service.formulaire}`
-
-		// Download file at URL
-		window.open(url, '_blank');
+		downloadAsset(service.form);
 	};
 
 	return (
@@ -86,7 +85,7 @@ export default function ServicesDetails(props) {
 											}}
 										></div>
 									</div>
-									{props.service.formulaire && (
+									{props.service.form && (
 												<button 
 													type="button" 
 													onClick={() =>
@@ -94,7 +93,7 @@ export default function ServicesDetails(props) {
 															props.service
 														)
 													}
-													class="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2  w-full justify-center"
+													className="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2  w-full justify-center"
 													>
 												<DocumentDownloadIcon
 														className="-ml-1 mr-2 h-5 w-5"

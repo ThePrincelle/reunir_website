@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import DOMPurify from "dompurify";
 
-import { getSingleton } from "../cms";
+import { getSingleton, downloadAsset } from "../cms";
 
 import { HashLink } from "react-router-hash-link";
 
@@ -34,9 +34,7 @@ export default function Psychamarche(props) {
 	}, []);
 
 	let downloadForm = () => {
-		let url = `https://cms.re-unir.fr/${content.formulaire}`
-		// Download file at URL
-		window.open(url, '_blank');
+		downloadAsset(content.form)
 	}
 
 	return (
