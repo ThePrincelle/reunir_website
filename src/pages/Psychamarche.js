@@ -90,7 +90,7 @@ export default function Psychamarche(props) {
 						<HashLink to="/psychamarche#events">
 							<button
 								type="button"
-								className="inline-flex mt-4 ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
+								className="inline-flex mr-4  mt-4 ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ export default function Psychamarche(props) {
 							onClick={() =>
 								downloadForm()
 							}
-							className="inline-flex ml-4 mt-4 items-center p-1.5 border border-transparent rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 space-x-1"
+							className="inline-flex mt-4 items-center p-1.5 border border-transparent rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 space-x-1"
 						>
 							<DocumentDownloadIcon
 								className="h-6 w-6"
