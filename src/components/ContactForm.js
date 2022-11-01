@@ -171,6 +171,23 @@ export default function ContactForm(props) {
 		downloadAsset(service.form);
 	};
 
+	let parseTabs = (tabs) => {
+		// Tabs is a string (tab1;tab2;tab3)
+		// Split it and create a nice string (tab1, tab2 & tab3) (or tab1 & tab2)
+		let parsedTabs = tabs.split(";");
+		let parsedTabsString = "";
+		parsedTabs.forEach((tab, index) => {
+			if (index == parsedTabs.length - 1) {
+				parsedTabsString += tab;
+			} else if (index == parsedTabs.length - 2) {
+				parsedTabsString += tab + " & ";
+			} else {
+				parsedTabsString += tab + ", ";
+			}
+		});
+		return parsedTabsString;
+	}
+
 	return (
 		<form
 			id="contact-form"
@@ -374,7 +391,7 @@ export default function ContactForm(props) {
 							<option key={service._id} value={service._id}>
 								{"text" in service
 									? service.text
-									: service.titre + " (" + service.type + ")"}
+									: service.titre + " (" + parseTabs(service.type) + ")"}
 							</option>
 						))}
 					</select>
