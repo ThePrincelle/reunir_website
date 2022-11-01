@@ -16,6 +16,23 @@ export default function ServicesDetails(props) {
 		downloadAsset(service.form);
 	};
 
+	let parseTabs = (tabs) => {
+		// Tabs is a string (tab1;tab2;tab3)
+		// Split it and create a nice string (tab1, tab2 & tab3) (or tab1 & tab2)
+		let parsedTabs = tabs.split(";");
+		let parsedTabsString = "";
+		parsedTabs.forEach((tab, index) => {
+			if (index == parsedTabs.length - 1) {
+				parsedTabsString += tab;
+			} else if (index == parsedTabs.length - 2) {
+				parsedTabsString += tab + " & ";
+			} else {
+				parsedTabsString += tab + ", ";
+			}
+		});
+		return parsedTabsString;
+	}
+
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog
@@ -70,7 +87,7 @@ export default function ServicesDetails(props) {
 								<div className="flex-1 bg-white pt-8 pb-6 p-2 flex flex-col justify-between">
 									<div className="flex-1 pb-5">
 										<p className="text-sm font-medium text-green-600">
-											{props.service.type}
+											{parseTabs(props.service.type)}
 										</p>
 										<p className="text-xl font-semibold text-gray-900">
 											{props.service.titre}
