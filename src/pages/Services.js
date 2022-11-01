@@ -20,27 +20,35 @@ export default function Services(props) {
 	let [currentTab, setCurrentTab] = useState("Particuliers");
 	let [tabs, setTabs] = useState([]);
 
+	let processTypes = (services, isPublished = true) => {
+		// Tabs is generated from services on type string (tab1;tab2;tab3)
+		let tabs = [];
+		let entries = services;
+		if (isPublished) {
+			entries = services.filter((service) => service.publish);
+		}
+		entries.forEach((service) => {
+			if (service.type) {
+				let types = service.type.split(";");
+				types.forEach((type) => {
+					if (!tabs.includes(type)) {
+						tabs.push(type);
+					}
+				});
+			}
+		});
+		return tabs;
+	}
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		props.loader(true);
 		getCollection("service")
 			.then((data) => {
 				setServices(data.entries);
-				setTabs([
-					...new Set(
-						data.entries
-							.filter((item) => item.publish == true)
-							.map((item) => item.type)
-					),
-				]);
+				setTabs(processTypes(data.entries, true));
 				setCurrentTab(
-					[
-						...new Set(
-							data.entries
-								.filter((item) => item.publish == true)
-								.map((item) => item.type)
-						),
-					][0]
+					processTypes(data.entries, true)[0]
 				);
 				props.loader(false);
 			})
@@ -74,6 +82,23 @@ export default function Services(props) {
 	};
 
 	let history = useHistory();
+
+	let parseTabs = (tabs) => {
+		// Tabs is a string (tab1;tab2;tab3)
+		// Split it and create a nice string (tab1, tab2 & tab3) (or tab1 & tab2)
+		let parsedTabs = tabs.split(";");
+		let parsedTabsString = "";
+		parsedTabs.forEach((tab, index) => {
+			if (index == parsedTabs.length - 1) {
+				parsedTabsString += tab;
+			} else if (index == parsedTabs.length - 2) {
+				parsedTabsString += tab + " & ";
+			} else {
+				parsedTabsString += tab + ", ";
+			}
+		});
+		return parsedTabsString;
+	}
 
 	return (
 		<div className="bg-gray-50 relative px-4 sm:px-6 lg:px-8">
@@ -111,7 +136,7 @@ export default function Services(props) {
 						{services.map(
 							(service) =>
 								service.publish &&
-								service.type === currentTab && (
+								service.type.split(";").includes(currentTab) && (
 									<div
 										key={service.titre}
 										className="flex flex-col rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg"
@@ -137,7 +162,7 @@ export default function Services(props) {
 										<div className="flex-1 bg-white p-6 flex flex-col justify-between">
 											<div className="flex-1 pb-5">
 												<p className="text-sm font-medium text-green-600">
-													{service.type}
+													{parseTabs(service.type)}
 												</p>
 												<p className="text-xl font-semibold pt-2 text-gray-900">
 													{service.titre}
