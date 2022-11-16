@@ -22,12 +22,8 @@ jobs:
           node-version: '14.x'
 
       - name: Install dependancies
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
         run: yarn install
           
       - name: Build
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
         run: yarn build
           
