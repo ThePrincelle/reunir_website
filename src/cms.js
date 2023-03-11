@@ -52,6 +52,13 @@ export function sendForm(name, data) {
 
 export function downloadAsset(entry) {
 	// entry contains path and filename, download the file
+
+	// If entry is a string, it's the path (with "/storage/uploads" prefix)
+	if (typeof entry === "string") {
+		// Open new tab with the file
+		window.open(`${BASE_URL}${entry.path}`, "_blank");
+	}
+
 	let url = `${BASE_URL}/storage/uploads${entry.path}`;
 
 	// Download file with axios
