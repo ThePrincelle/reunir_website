@@ -81,7 +81,7 @@ export default function PaymentModal(props) {
 												<div className="relative text-center mx-auto max-w-prose lg:max-w-none">
 													<figure>
 														<div className="aspect-w-4 aspect-h-4">
-                              <a href={texts.paypal_link} target="_blank">
+                              <a href={texts.paypal_link} target="_blank" rel="noreferrer">
 															<img
 																className="rounded-lg shadow-lg hover:shadow-xl transition-shadow object-cover object-center"
 																src={
@@ -98,7 +98,7 @@ export default function PaymentModal(props) {
 															/>
                               </a>
 														</div>
-														{texts.paypal_link !=
+														{texts.paypal_link !==
 															"" && (
 															<figcaption className="mt-3 flex text-sm text-green-600 hover:text-green-800">
 																<LinkIcon
@@ -109,7 +109,7 @@ export default function PaymentModal(props) {
 																	href={
 																		texts.paypal_link
 																	}
-																	target="_blank"
+																	target="_blank" rel="noreferrer"
 																	className="ml-2 "
 																>
 																	{

@@ -53,6 +53,7 @@ export default function Services(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	let closeDetails = () => {
@@ -89,9 +90,9 @@ export default function Services(props) {
 		let parsedTabs = tabs.split(";");
 		let parsedTabsString = "";
 		parsedTabs.forEach((tab, index) => {
-			if (index == parsedTabs.length - 1) {
+			if (index === parsedTabs.length - 1) {
 				parsedTabsString += tab;
-			} else if (index == parsedTabs.length - 2) {
+			} else if (index === parsedTabs.length - 2) {
 				parsedTabsString += tab + " & ";
 			} else {
 				parsedTabsString += tab + ", ";
@@ -122,7 +123,7 @@ export default function Services(props) {
 							setCurrentTab={setTab}
 						/>
 					)}
-					{/*(currentTab == "Professionnels" && assetsServices && assetsServices.image) && (
+					{/*(currentTab === "Professionnels" && assetsServices && assetsServices.image) && (
 						<img
 							className="h-32 sm:h-64 rounded-lg mt-8 w-full object-cover bg-gray-100"
 							src={
@@ -177,7 +178,7 @@ export default function Services(props) {
 												></div>
 												{service.description_detaillee && (
 													<div className="pt-4 text-yellow-600 hover:text-yellow-700">
-														<a
+														<span
 															onClick={() => {
 																setDetails(
 																	service
@@ -187,13 +188,13 @@ export default function Services(props) {
 														>
 															Plus
 															d'informations...
-														</a>
+														</span>
 													</div>
 												)}
 
 												{service.redirect && (
 													<div className="pt-4 text-yellow-600 hover:text-yellow-700">
-														<a
+														<span
 															onClick={() => {
 																history.push(
 																	service.redirect
@@ -203,7 +204,7 @@ export default function Services(props) {
 														>
 															Plus
 															d'informations...
-														</a>
+														</span>
 													</div>
 												)}
 											</div>

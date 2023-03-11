@@ -118,7 +118,7 @@ export default function Footer(props) {
 							<a
 								className="text-gray-400 hover:text-gray-500 transition-colors"
 								href="https://princelle.org"
-								target="_blank"
+								target="_blank" rel="noreferrer"
 							>
 								Maxime Princelle
 							</a>

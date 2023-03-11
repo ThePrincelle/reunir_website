@@ -19,6 +19,7 @@ import Psychamarche from "./pages/Psychamarche";
 import Contact from "./pages/Contact";
 import Legal from "./pages/Legal";
 import Payment from "./pages/Payment";
+import Events from "./pages/Events";
 
 function App() {
 	const routes = [
@@ -49,6 +50,13 @@ function App() {
 			path: "/psychamarche",
 			exact: false,
 			component: Psychamarche,
+		},
+		{
+			id: "events",
+			name: "Évènements",
+			path: "/evenements",
+			exact: false,
+			component: Events,
 		},
 		{
 			id: "contact",

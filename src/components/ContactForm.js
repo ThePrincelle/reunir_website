@@ -1,11 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { getCollection, sendForm, downloadAsset } from "../cms";
 
 import { DocumentDownloadIcon } from "@heroicons/react/solid";
-
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
 
@@ -13,12 +10,9 @@ const objects = [
 	{ idx: 0, id: "autre", name: "Autre" },
 	{ idx: 1, id: "rdv", name: "Demande de rendez-vous" },
 	{ idx: 2, id: "rdv", name: "Inscription pour une activité" },
+	{ idx: 3, id: "event", name: "Participer à un évènement" },
 	//{ idx: 3, id: "psychamarche", name: "Demande de participation à une psychamarche" },
 ];
-
-function classNames(...classes) {
-	return classes.filter(Boolean).join(" ");
-}
 
 export default function ContactForm(props) {
 	let [firstName, setFirstName] = useState("");
@@ -37,7 +31,7 @@ export default function ContactForm(props) {
 	let [sService, setsService] = useState(null);
 
 	useEffect(() => {
-		if (selected.id == "psychamarche") {
+		if (selected.id === "psychamarche") {
 			getCollection("events")
 				.then((data) => {
 					// Filter event that are older than today
@@ -48,7 +42,7 @@ export default function ContactForm(props) {
 					});
 					setPsychamarches(
 						events
-							.filter((e) => e.published == true)
+							.filter((e) => e.published === true)
 							.concat([
 								{ _id: "question", text: "Autre question" },
 							])
@@ -57,12 +51,12 @@ export default function ContactForm(props) {
 				.catch((err) => console.error(err));
 		}
 
-		if (selected.id == "rdv") {
+		if (selected.id === "rdv") {
 			getCollection("service")
 				.then((data) => {
 					setServices(
 						data.entries
-							.filter((e) => e.publish == true)
+							.filter((e) => e.publish === true)
 							.concat([
 								{ _id: "question", text: "Autre question" },
 							])
@@ -71,7 +65,7 @@ export default function ContactForm(props) {
 				.catch((err) => console.error(err));
 		}
 
-		if (selected.id == "autre") {
+		if (selected.id === "autre") {
 			setsService(null);
 			setsMarche(null);
 		}
@@ -97,7 +91,7 @@ export default function ContactForm(props) {
 			message: message,
 		};
 
-		if (selected.id == "autre") {
+		if (selected.id === "autre") {
 			sendForm("contact", dataForm)
 				.then(() => {
 					resetForm();
@@ -108,7 +102,7 @@ export default function ContactForm(props) {
 				});
 		}
 
-		if (selected.id == "rdv") {
+		if (selected.id === "rdv") {
 			dataForm.service = sService
 				? "text" in sService
 					? sService.text
@@ -125,7 +119,7 @@ export default function ContactForm(props) {
 				});
 		}
 
-		if (selected.id == "psychamarche") {
+		if (selected.id === "psychamarche") {
 			dataForm.evenement = sMarche
 				? "text" in sMarche
 					? sMarche.text
@@ -177,9 +171,9 @@ export default function ContactForm(props) {
 		let parsedTabs = tabs.split(";");
 		let parsedTabsString = "";
 		parsedTabs.forEach((tab, index) => {
-			if (index == parsedTabs.length - 1) {
+			if (index === parsedTabs.length - 1) {
 				parsedTabsString += tab;
-			} else if (index == parsedTabs.length - 2) {
+			} else if (index === parsedTabs.length - 2) {
 				parsedTabsString += tab + " & ";
 			} else {
 				parsedTabsString += tab + ", ";
@@ -313,7 +307,7 @@ export default function ContactForm(props) {
 					))}
 				</select>
 			</div>
-			{selected.id == "psychamarche" && psychamarches && (
+			{selected.id === "psychamarche" && psychamarches && (
 				<div className="sm:col-span-2">
 					<label
 						htmlFor="seance"
@@ -363,7 +357,7 @@ export default function ContactForm(props) {
 					</select>
 				</div>
 			)}
-			{selected.id == "rdv" && services && (
+			{selected.id === "rdv" && services && (
 				<div className="sm:col-span-2">
 					<label
 						htmlFor="service"

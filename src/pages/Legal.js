@@ -13,6 +13,7 @@ export default function Legal(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Mentions Légales page

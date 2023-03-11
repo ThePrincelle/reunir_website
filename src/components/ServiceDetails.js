@@ -22,9 +22,9 @@ export default function ServicesDetails(props) {
 		let parsedTabs = tabs.split(";");
 		let parsedTabsString = "";
 		parsedTabs.forEach((tab, index) => {
-			if (index == parsedTabs.length - 1) {
+			if (index === parsedTabs.length - 1) {
 				parsedTabsString += tab;
-			} else if (index == parsedTabs.length - 2) {
+			} else if (index === parsedTabs.length - 2) {
 				parsedTabsString += tab + " & ";
 			} else {
 				parsedTabsString += tab + ", ";

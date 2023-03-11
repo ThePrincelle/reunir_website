@@ -31,11 +31,11 @@ export default function Tabs(props) {
 					aria-label="Tabs"
 				>
 					{tabs.map((tab, tabIdx) => (
-						<a
+						<div
 							key={tab}
 							onClick={() => {props.setCurrentTab(tab)}}
 							className={classNames(
-								currentTab == tab
+								currentTab === tab
 									? "text-gray-900"
 									: "text-gray-500 hover:text-gray-700 transition-colors",
 								tabIdx === 0 ? "rounded-l-lg" : "",
@@ -44,19 +44,19 @@ export default function Tabs(props) {
 									: "",
 								"group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
 							)}
-							aria-current={currentTab == tab ? "page" : undefined}
+							aria-current={currentTab === tab ? "page" : undefined}
 						>
 							<span>{tab}</span>
 							<span
 								aria-hidden="true"
 								className={classNames(
-									currentTab == tab
+									currentTab === tab
 										? "bg-yellow-500"
 										: "bg-transparent",
 									"absolute inset-x-0 bottom-0 h-0.5"
 								)}
 							/>
-						</a>
+						</div>
 					))}
 				</nav>
 			</div>

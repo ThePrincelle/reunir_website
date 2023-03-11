@@ -46,7 +46,7 @@ export default function Event(props) {
 						<Popup>
 							<a
 								href={`https://maps.google.com/?q=${props.event.lieu.lat},${props.event.lieu.lng}`}
-								target="_blank"
+								target="_blank" rel="noreferrer"
 							>
 								Google Maps
 							</a>
@@ -172,7 +172,7 @@ export default function Event(props) {
 					</Link>
 					<a
 						href={`https://maps.google.com/?q=${props.event.lieu.lat},${props.event.lieu.lng}`}
-						target="_blank"
+						target="_blank" rel="noreferrer"
 						className="inline-flex ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
 					>
 						<svg
