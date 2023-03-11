@@ -108,7 +108,7 @@ export default function Events(props) {
 							</p>
 						</div>
 					</div>
-					<div className="max-w-7xl mx-auto mt-6 border-b border-gray-900/ space-y-5">
+					<div className="max-w-7xl mx-auto mt-12 border-b border-gray-900/ space-y-5">
 						{events.map((event) => (
 							<div
 								key={event._id}
