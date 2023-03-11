@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect, createRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 import { DocumentDownloadIcon } from "@heroicons/react/solid";
@@ -11,6 +11,8 @@ import { downloadAsset } from "../cms";
 
 export default function ServicesDetails(props) {
 	const [open, setOpen] = useState(true);
+
+	const modalRef = createRef();
 
 	let downloadForm = (service) => {
 		downloadAsset(service.form);
@@ -32,6 +34,14 @@ export default function ServicesDetails(props) {
 		});
 		return parsedTabsString;
 	}
+	
+	useEffect(() => {
+		setTimeout(() => {
+			if (props.service) {
+				modalRef.current.scrollTo(0, 0);
+			}
+		}, 500);
+	}, [props.service, modalRef]);
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -43,7 +53,7 @@ export default function ServicesDetails(props) {
 					props.closeDetails();
 				}}
 			>
-				<div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+				<div className="flex items-start justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 					<Transition.Child
 						as={Fragment}
 						enter="ease-out duration-300"
@@ -72,7 +82,7 @@ export default function ServicesDetails(props) {
 						leaveFrom="opacity-100 translate-y-0 sm:scale-100"
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
-						<div className="inline-block align-bottom bg-white rounded-lg px-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-16 sm:align-middle sm:max-w-lg sm:w-full p-5 sm:p-6">
+						<div ref={modalRef} className="inline-block align-top items-start bg-white rounded-lg px-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-16 sm:align-middle sm:max-w-lg sm:w-full p-5 sm:p-6">
 							{(props.service.image && 'path' in props.service.image) && (
 								<img
 									className="flex-shrink-0 rounded-t-lg absolute inset-0 h-48 w-full min-w-full object-cover"
@@ -86,7 +96,7 @@ export default function ServicesDetails(props) {
 							<div className="pt-40">
 								<div className="flex-1 bg-white pt-8 pb-6 p-2 flex flex-col justify-between">
 									<div className="flex-1 pb-5">
-										<p className="text-sm font-medium text-green-600">
+										<p className="text-sm font-medium text-green-600" id="topofmodal">
 											{parseTabs(props.service.type)}
 										</p>
 										<p className="text-xl font-semibold text-gray-900">
