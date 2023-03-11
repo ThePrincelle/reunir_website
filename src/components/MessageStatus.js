@@ -44,7 +44,7 @@ export default function MessageStatus(props) {
 					>
 						<div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-16 sm:align-middle sm:max-w-lg sm:w-full p-5 px-14 m-auto mt-1/2 sm:p-6">
 							<div>
-							{props.status == "OK" ? <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+							{props.status === "OK" ? <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
 									<CheckIcon
 										className="h-6 w-6 text-green-600"
 										aria-hidden="true"
@@ -60,11 +60,11 @@ export default function MessageStatus(props) {
 										as="h3"
 										className="text-lg leading-6 font-medium text-gray-900"
 									>
-										{props.status == "OK" ? "Message envoyé avec succès" : "Erreur lors de l'envoi du message"} 
+										{props.status === "OK" ? "Message envoyé avec succès" : "Erreur lors de l'envoi du message"} 
 									</Dialog.Title>
 									<div className="mt-2">
 										<p className="text-sm text-gray-500">
-										{props.status == "OK" ? "Votre message a bien été envoyé." : "Vous pouvez tenter de recommencer ou alors m'envoyer un message directement."}
+										{props.status === "OK" ? "Votre message a bien été envoyé." : "Vous pouvez tenter de recommencer ou alors m'envoyer un message directement."}
 										</p>
 									</div>
 								</div>

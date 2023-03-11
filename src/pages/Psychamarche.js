@@ -11,13 +11,13 @@ import { getSingleton, downloadAsset } from "../cms";
 
 import { HashLink } from "react-router-hash-link";
 
+import Events from "../sections/psychamarches/Events";
+import Participate from "../sections/psychamarches/Participate";
+
 const pages = [
 	{ name: "Services", href: "/services", current: false },
 	{ name: "Psychamarche", href: "/psychamarche", current: true },
 ];
-
-import Events from "../sections/psychamarches/Events";
-import Participate from "../sections/psychamarches/Participate";
 
 export default function Psychamarche(props) {
 	let [content, setContent] = useState(null);
@@ -31,6 +31,7 @@ export default function Psychamarche(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	let downloadForm = () => {
@@ -43,7 +44,7 @@ export default function Psychamarche(props) {
 				<div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
 
 				<nav className="flex" aria-label="Breadcrumb">
-					<ol role="list" className="flex items-center space-x-2">
+					<ol className="flex items-center space-x-2">
 						<li>
 							<div>
 								<Link
@@ -171,7 +172,7 @@ export default function Psychamarche(props) {
 												"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1184&h=1376&f[brighten]=10&o=true&src=" +
 												content.image.path
 											}
-											alt="Psychamarche image"
+											alt="Illustration pour les psychamarches"
 											width={1184}
 											height={1376}
 										/>

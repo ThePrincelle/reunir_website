@@ -18,6 +18,7 @@ export default function Intro(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

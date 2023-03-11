@@ -26,6 +26,7 @@ export default function About(props) {
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -91,7 +92,7 @@ export default function About(props) {
 										height={1376}
 									/>
 								</div>
-								{profilePicture.meta.author != null && profilePicture.meta.author != "" && <figcaption className="mt-3 flex text-sm text-gray-500">
+								{profilePicture.meta.author !== null && profilePicture.meta.author !== "" && <figcaption className="mt-3 flex text-sm text-gray-500">
 									<CameraIcon
 										className="flex-none w-5 h-5 text-gray-400"
 										aria-hidden="true"
@@ -123,7 +124,7 @@ export default function About(props) {
 										height={1376}
 									/>
 								</div>
-								{profilePicture.meta.author != null && profilePicture.meta.author != "" && <figcaption className="mt-3 flex text-sm text-gray-500">
+								{profilePicture.meta.author !== null && profilePicture.meta.author !== "" && <figcaption className="mt-3 flex text-sm text-gray-500">
 									<CameraIcon
 										className="flex-none w-5 h-5 text-gray-400"
 										aria-hidden="true"

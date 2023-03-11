@@ -10,6 +10,11 @@ import { Link } from "react-router-dom";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+import { getSingleton, getCollection } from "../cms";
+
+import ContactForm from "../components/ContactForm";
+import MessageStatus from "../components/MessageStatus";
+
 import L from "leaflet";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -20,10 +25,6 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
 });
 
-import { getSingleton, getCollection } from "../cms";
-
-import ContactForm from "../components/ContactForm";
-import MessageStatus from "../components/MessageStatus";
 
 export default function Contact(props) {
 	let [urlInstagram, setInstagramUrl] = useState("");
@@ -57,6 +58,7 @@ export default function Contact(props) {
 				setHoraires(data.entries);
 			})
 			.catch((err) => console.error(err));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	let closeStatus = () => {
@@ -273,7 +275,7 @@ export default function Contact(props) {
 														/\s/g,
 														""
 													)}`}
-													target="_blank"
+													target="_blank" rel="noreferrer"
 													className="hover:text-gray-200 transition-colors"
 												>
 													{phone}
@@ -293,7 +295,7 @@ export default function Contact(props) {
 											<span className="ml-3">
 												<a
 													href={`mailto:${email}`}
-													target="_blank"
+													target="_blank" rel="noreferrer"
 													className="hover:text-gray-200 transition-colors"
 												>
 													{email}
@@ -314,7 +316,7 @@ export default function Contact(props) {
 												{cabinet && (
 													<a
 														href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
-														target="_blank"
+														target="_blank" rel="noreferrer"
 														className="hover:text-gray-200 transition-colors"
 													>
 														{cabinet.address}
@@ -324,7 +326,6 @@ export default function Contact(props) {
 										</dd>
 									</dl>
 									<ul
-										role="list"
 										className="mt-8 flex space-x-12 items-center"
 									>
 										<li>
@@ -421,7 +422,6 @@ export default function Contact(props) {
 						</p>
 						<div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-max">
 							<ul
-								role="list"
 								className="divide-y divide-gray-200"
 							>
 								{horaires.map((horaire) => (
@@ -467,7 +467,7 @@ export default function Contact(props) {
 											<Popup>
 												<a
 													href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
-													target="_blank"
+													target="_blank" rel="noreferrer"
 												>
 													Google Maps
 												</a>
@@ -482,7 +482,7 @@ export default function Contact(props) {
 										<span className="ml-2">
 											<a
 												href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
-												target="_blank"
+												target="_blank" rel="noreferrer"
 												className="hover:text-gray-800 transition-colors"
 											>
 												{cabinet.address}

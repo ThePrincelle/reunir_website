@@ -2,6 +2,8 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
+import { BookOpenIcon, CalendarIcon, MapIcon } from "@heroicons/react/outline";
+
 import Intro from "../sections/home/Intro";
 
 export default function Home(props) {
@@ -37,23 +39,28 @@ export default function Home(props) {
 							Audrey Bauerlé
 						</p>
                         <p className="mt-2 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-2 md:max-w-3xl">Psychanalyste (Membre FEDEPSY)</p>
-						<div className="mt-10 mb-6 sm:flex sm:justify-center lg:justify-start">
-							<div className="rounded-md shadow">
-								<Link
-									to="/services"
-									className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10"
-								>
-									Services
-								</Link>
-							</div>
-							<div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-								<Link
-									to="/psychamarche"
-									className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
-								>
-									Psychamarche
-								</Link>
-							</div>
+						<div className="mt-8 mb-6 sm:space-x-3 sm:block flex flex-col space-y-2">
+							<Link
+								to="/services"
+								className="inline-flex items-center gap-x-2 rounded-md bg-green-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-md hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-all-ease-in-out duration-300 text-center"
+							>
+								<BookOpenIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+								Services
+							</Link>
+							<Link
+								to="/psychamarche"
+								className="inline-flex items-center gap-x-2 rounded-md bg-green-50 py-2.5 px-3.5 text-sm font-semibold text-green-600 shadow-md hover:bg-green-100  transition-all-ease-in-out duration-300 text-center"
+							>
+								<MapIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+								Psychamarche
+							</Link>
+							<Link
+								to="/evenements"
+								className="inline-flex items-center gap-x-2 rounded-md bg-green-50 py-2.5 px-3.5 text-sm font-semibold text-green-600 shadow-md hover:bg-green-100  transition-all-ease-in-out duration-300 text-center"
+							>
+								<CalendarIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+								Évènements
+							</Link>
 						</div>
 					</div>
 				</div>

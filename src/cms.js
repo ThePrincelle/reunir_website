@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "https://cms.re-unir.fr";
 const FORM_API_KEY = "314581d2946763fc110c31e14328ad";
-const ASSETS_API_KEY = "fbf36043e1aef774506461b27f1cd1";
+// const ASSETS_API_KEY = "fbf36043e1aef774506461b27f1cd1";
 
 export function getSingleton(name) {
 	return new Promise((resolve, reject) => {
@@ -52,6 +52,13 @@ export function sendForm(name, data) {
 
 export function downloadAsset(entry) {
 	// entry contains path and filename, download the file
+
+	// If entry is a string, it's the path (with "/storage/uploads" prefix)
+	if (typeof entry === "string") {
+		// Open new tab with the file
+		window.open(`${BASE_URL}${entry.path}`, "_blank");
+	}
+
 	let url = `${BASE_URL}/storage/uploads${entry.path}`;
 
 	// Download file with axios
