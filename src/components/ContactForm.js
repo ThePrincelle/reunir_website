@@ -31,11 +31,14 @@ export default function ContactForm(props) {
 	let [sService, setsService] = useState(null);
 
 	useEffect(() => {
+		setsEvent(null);
+		setsService(null);
+
 		if (selected.id === "event") {
 			getCollection("Evenements")
 				.then((data) => {
 					let entries = data.entries;
-					
+
 					// Filter out events that are not published
 					entries = entries.filter((entry) => entry.published === true);
 
@@ -96,6 +99,7 @@ export default function ContactForm(props) {
 					);
 				})
 				.catch((err) => console.error(err));
+			
 		}
 
 		if (selected.id === "autre") {
