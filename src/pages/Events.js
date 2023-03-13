@@ -4,11 +4,11 @@ import DOMPurify from "dompurify";
 
 import { Link } from "react-router-dom";
 
-import { getCollection } from "../cms";
+import { getCollection, downloadAsset } from "../cms";
 
 import ImageModal from "../components/ImageModal";
 
-import { BookOpenIcon, ChevronRightIcon, ChatIcon, MapIcon, CalendarIcon, ZoomInIcon, LocationMarkerIcon } from "@heroicons/react/outline";
+import { BookOpenIcon, ChevronRightIcon, ChatIcon, MapIcon, CalendarIcon, ZoomInIcon, LocationMarkerIcon, DocumentDownloadIcon } from "@heroicons/react/outline";
 import { HashtagIcon, StarIcon } from "@heroicons/react/solid";
 
 
@@ -35,6 +35,10 @@ export default function Events(props) {
 		setWantedImageAlt(alt);
 		setWantedImagePath(path);
 		setImageModal(true);
+	};
+
+	let downloadForm = (event) => {
+		downloadAsset(event.form);
 	};
 
 	useEffect(() => {
@@ -112,10 +116,10 @@ export default function Events(props) {
 						{events.map((event) => (
 							<div
 								key={event._id}
-								className={"overflow-hidden bg-gray-50 sm:rounded-lg group transition-all" + (event.pinned ? " border-t-2 border-b-2 sm:border-2 border-yellow-500 shadow-md" : " shadow-md")}
+								className={"overflow-hidden bg-gray-50 lg:rounded-lg group transition-all" + (event.pinned ? " border-t-2 border-b-2 lg:border-2 border-yellow-500 shadow-md" : " shadow-md")}
 							>
 								<div className="px-4 py-5 sm:p-6 flex flex-wrap justify-between items-center">
-									<div className="">
+									<div className="self-start">
 										<div className="border-l-2 pl-2">
 										<div className={"flex items-center justify-start content-center" + (event.pinned ? " mb-1" : "")}>
 											<StarIcon className={"inline-block w-7 h-7 text-yellow-500 mr-1" + (event.pinned ? "" : " hidden")} />
@@ -157,7 +161,7 @@ export default function Events(props) {
 											}}
 										/>
 									</div>
-									<div className="mx-auto mt-4 lg:mx-0 lg:mt-0">
+									<div className="mx-auto align-center mt-4 lg:mx-0 lg:mt-0">
 										{(event.image && 'path' in event.image) && (
 											<div className="relative">
 												<img className="w-full rounded-lg shadow-md"
@@ -177,6 +181,23 @@ export default function Events(props) {
 												</button>
 											</div>
 										)}
+										{event.form && (
+												<button 
+													type="button" 
+													onClick={(e) =>
+														downloadForm(
+															event
+														)
+													}
+													className={"inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 w-full justify-center" + (event.image && 'path' in event.image ? " mt-4" : "")}
+													>
+												<DocumentDownloadIcon
+														className="-ml-1 mr-2 h-5 w-5"
+														aria-hidden="true"
+													/>
+												Télécharger le formulaire d'inscription
+												</button>
+											)}
 									</div>
 								</div>
 							</div>
