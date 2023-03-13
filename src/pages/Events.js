@@ -51,10 +51,28 @@ export default function Events(props) {
 				// Filter out events that are not published
 				entries = entries.filter((entry) => entry.published === true);
 
+				// Order by date, from the closest to the furthest
+				entries.sort((a, b) => {
+					if (a.date && b.date) {
+						let eventDateA = new Date(a.date);
+						let eventDateB = new Date(b.date);
+						if (eventDateA < eventDateB) return -1;
+						if (eventDateA > eventDateB) return 1;
+					}
+					return 0;
+				});
+
 				// Set pinned events first
 				entries.sort((a, b) => {
 					if (a.pinned === true && b.pinned === false) return -1;
 					if (a.pinned === false && b.pinned === true) return 1;
+					return 0;
+				});
+
+				// Set event with "recurrent" to the end
+				entries.sort((a, b) => {
+					if (a.recurrent === true && b.recurrent === false) return 1;
+					if (a.recurrent === false && b.recurrent === true) return -1;
 					return 0;
 				});
 
@@ -116,7 +134,7 @@ export default function Events(props) {
 						{events.map((event) => (
 							<div
 								key={event._id}
-								className={"overflow-hidden bg-gray-50 lg:rounded-lg group transition-all" + (event.pinned ? " border-t-2 border-b-2 lg:border-2 border-yellow-500 shadow-md" : " shadow-md")}
+								className={"overflow-hidden bg-gray-50 lg:rounded-lg group transition-all border-t-2 border-b-2 lg:border-2" + (event.pinned ? " border-yellow-500 shadow-md" : " border-gray-600 shadow-md")}
 							>
 								<div className="px-4 py-5 sm:p-6 flex flex-wrap justify-between items-center">
 									<div className="self-start">

@@ -34,15 +34,48 @@ export default function ContactForm(props) {
 		if (selected.id === "event") {
 			getCollection("Evenements")
 				.then((data) => {
-					// Filter event that are older than today
-					let today = new Date();
-					let events = data.entries.filter((event) => {
-						let eventDate = new Date(event.date);
-						return eventDate >= today || event.recurrence;
+					let entries = data.entries;
+					
+					// Filter out events that are not published
+					entries = entries.filter((entry) => entry.published === true);
+
+					// Order by date, from the closest to the furthest
+					entries.sort((a, b) => {
+						if (a.date && b.date) {
+							let eventDateA = new Date(a.date);
+							let eventDateB = new Date(b.date);
+							if (eventDateA < eventDateB) return -1;
+							if (eventDateA > eventDateB) return 1;
+						}
+						return 0;
 					});
+
+					// Set pinned events first
+					entries.sort((a, b) => {
+						if (a.pinned === true && b.pinned === false) return -1;
+						if (a.pinned === false && b.pinned === true) return 1;
+						return 0;
+					});
+
+					// Set event with "recurrent" to the end
+					entries.sort((a, b) => {
+						if (a.recurrent === true && b.recurrent === false) return 1;
+						if (a.recurrent === false && b.recurrent === true) return -1;
+						return 0;
+					});
+
+					// If event has date, check if it's in the past, if so, don't display it
+					entries = entries.filter((entry) => {
+						if (entry.date) {
+							let eventDate = new Date(entry.date);
+							let today = new Date();
+							return eventDate >= today;
+						}
+						return true;
+					});
+
 					setEvents(
-						events
-							.filter((e) => e.published === true)
+						entries
 							.concat([
 								{ _id: "question", title: "Autre question" },
 							])
