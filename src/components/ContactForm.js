@@ -24,15 +24,15 @@ export default function ContactForm(props) {
 
 	let [selected, setSelected] = useState(objects[0]);
 
-	let [psychamarches, setPsychamarches] = useState([]);
 	let [services, setServices] = useState([]);
+	let [events, setEvents] = useState([]);
 
-	let [sMarche, setsMarche] = useState(null);
+	let [sEvent, setsEvent] = useState(null);
 	let [sService, setsService] = useState(null);
 
 	useEffect(() => {
-		if (selected.id === "psychamarche") {
-			getCollection("events")
+		if (selected.id === "event") {
+			getCollection("Evenements")
 				.then((data) => {
 					// Filter event that are older than today
 					let today = new Date();
@@ -40,11 +40,11 @@ export default function ContactForm(props) {
 						let eventDate = new Date(event.date);
 						return eventDate >= today || event.recurrence;
 					});
-					setPsychamarches(
+					setEvents(
 						events
 							.filter((e) => e.published === true)
 							.concat([
-								{ _id: "question", text: "Autre question" },
+								{ _id: "question", title: "Autre question" },
 							])
 					);
 				})
@@ -67,7 +67,7 @@ export default function ContactForm(props) {
 
 		if (selected.id === "autre") {
 			setsService(null);
-			setsMarche(null);
+			setsEvent(null);
 		}
 	}, [selected]);
 
@@ -76,8 +76,8 @@ export default function ContactForm(props) {
 	}, [sService]);
 
 	useEffect(() => {
-		console.log(sMarche);
-	}, [sMarche]);
+		console.log(sEvent);
+	}, [sEvent]);
 
 	let sendMessage = (e) => {
 		e.preventDefault();
@@ -119,23 +119,10 @@ export default function ContactForm(props) {
 				});
 		}
 
-		if (selected.id === "psychamarche") {
-			dataForm.evenement = sMarche
-				? "text" in sMarche
-					? sMarche.text
-					: sMarche.titre +
-					  " (" +
-					  sMarche.lieu.address.split(", ").slice(0, -2).join(", ") +
-					  ") - " +
-					  (sMarche.recurrence
-							? (sMarche.recurrence + " à")
-							: new Date(sMarche.date).toLocaleDateString(
-									"fr-FR",
-									dateOptions
-							  )) +
-					  " " +
-					  sMarche.heure
-				: "Aucune séance sélectionnée.";
+		if (selected.id === "event") {
+			dataForm.evenement = sEvent
+				? eventName(sEvent)
+				: "Aucun évènement sélectionnée.";
 
 			sendForm("Psychamarche", dataForm)
 				.then(() => {
@@ -157,7 +144,7 @@ export default function ContactForm(props) {
 		setSubject("");
 		setMessage("");
 		setSelected(objects[0]);
-		setsMarche(null);
+		setsEvent(null);
 		setsService(null);
 	};
 
@@ -181,6 +168,22 @@ export default function ContactForm(props) {
 		});
 		return parsedTabsString;
 	}
+
+	let eventName = (event) => {
+		if ("time" in event) {
+			if ("date" in event) {
+				// Parse date (2021-01-01 => 01/01/2021)
+				let date = event.date.split("-");
+				date = date[2] + "/" + date[1] + "/" + date[0];
+				return `« ${event.title} » - ${date} à ${event.time}`;
+			}
+			return `« ${event.title} » - ${event.recurrent} à ${event.time}`;
+		}
+		if ("title" in event) {
+			return `${event.title}`;
+		}
+		return "Erreur";
+	};
 
 	return (
 		<form
@@ -307,20 +310,20 @@ export default function ContactForm(props) {
 					))}
 				</select>
 			</div>
-			{selected.id === "psychamarche" && psychamarches && (
+			{selected.id === "event" && events && (
 				<div className="sm:col-span-2">
 					<label
-						htmlFor="seance"
+						htmlFor="event"
 						className="block text-sm font-medium text-gray-700"
 					>
-						Séance de psychamarche
+						Évènement souhaité
 					</label>
 					<select
-						id="seance"
-						name="seance"
+						id="event"
+						name="event"
 						onChange={(e) => {
-							setsMarche(
-								psychamarches.filter(
+							setsEvent(
+								events.filter(
 									(o) => o._id === e.target.value
 								)[0]
 							);
@@ -331,27 +334,9 @@ export default function ContactForm(props) {
 							{" "}
 							-- Sélectionner un évènement ou autre --{" "}
 						</option>
-						{psychamarches.map((event) => (
+						{events.map((event) => (
 							<option key={event._id} value={event._id}>
-								{"text" in event
-									? event.text
-									: event.titre +
-									  " (" +
-									  event.lieu.address
-											.split(", ")
-											.slice(0, -2)
-											.join(", ") +
-									  ") - " +
-									  (event.recurrence
-											? (event.recurrence + " à")
-											: new Date(
-													event.date
-											  ).toLocaleDateString(
-													"fr-FR",
-													dateOptions
-											  )) +
-									  " " +
-									  event.heure}
+								{eventName(event)}
 							</option>
 						))}
 					</select>
@@ -397,6 +382,23 @@ export default function ContactForm(props) {
 					onClick={() =>
 						downloadForm(
 							sService
+						)
+					}
+					className="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 justify-center sm:w-full"
+					>
+				<DocumentDownloadIcon
+						className="-ml-1 mr-2 h-5 w-5"
+						aria-hidden="true"
+					/>
+				<span>Télécharger le formulaire d'inscription</span>
+				</button>
+			)}
+			{sEvent && sEvent.form && (
+				<button 
+					type="button" 
+					onClick={() =>
+						downloadForm(
+							sEvent
 						)
 					}
 					className="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 justify-center sm:w-full"
