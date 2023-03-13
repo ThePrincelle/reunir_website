@@ -4,7 +4,7 @@ import { getCollection, sendForm, downloadAsset } from "../cms";
 
 import { DocumentDownloadIcon } from "@heroicons/react/solid";
 
-const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+// const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
 
 const objects = [
 	{ idx: 0, id: "autre", name: "Autre" },
