@@ -11,6 +11,8 @@ import ImageModal from "../components/ImageModal";
 import { BookOpenIcon, ChevronRightIcon, ChatIcon, MapIcon, CalendarIcon, ZoomInIcon, LocationMarkerIcon, DocumentDownloadIcon } from "@heroicons/react/outline";
 import { HashtagIcon, StarIcon } from "@heroicons/react/solid";
 
+import { individualizeEvents } from "../utils/transform";
+
 
 export default function Events(props) {
 	let [events, setEvents] = useState([]);
@@ -46,7 +48,7 @@ export default function Events(props) {
 		props.loader(true);
 		getCollection("Evenements")
 			.then((data) => {
-				let entries = data.entries;
+				let entries = individualizeEvents(data.entries);
 
 				// Filter out events that are not published
 				entries = entries.filter((entry) => entry.published === true);
@@ -66,13 +68,6 @@ export default function Events(props) {
 				entries.sort((a, b) => {
 					if (a.pinned === true && b.pinned === false) return -1;
 					if (a.pinned === false && b.pinned === true) return 1;
-					return 0;
-				});
-
-				// Set event with "recurrent" to the end
-				entries.sort((a, b) => {
-					if (a.recurrent === true && b.recurrent === false) return 1;
-					if (a.recurrent === false && b.recurrent === true) return -1;
 					return 0;
 				});
 

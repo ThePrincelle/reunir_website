@@ -4,6 +4,8 @@ import { getCollection, sendForm, downloadAsset } from "../cms";
 
 import { DocumentDownloadIcon } from "@heroicons/react/solid";
 
+import { individualizeEvents } from "../utils/transform";
+
 // const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
 
 const objects = [
@@ -37,7 +39,7 @@ export default function ContactForm(props) {
 		if (selected.id === "event") {
 			getCollection("Evenements")
 				.then((data) => {
-					let entries = data.entries;
+					let entries = individualizeEvents(data.entries);
 
 					// Filter out events that are not published
 					entries = entries.filter((entry) => entry.published === true);
@@ -57,13 +59,6 @@ export default function ContactForm(props) {
 					entries.sort((a, b) => {
 						if (a.pinned === true && b.pinned === false) return -1;
 						if (a.pinned === false && b.pinned === true) return 1;
-						return 0;
-					});
-
-					// Set event with "recurrent" to the end
-					entries.sort((a, b) => {
-						if (a.recurrent === true && b.recurrent === false) return 1;
-						if (a.recurrent === false && b.recurrent === true) return -1;
 						return 0;
 					});
 
