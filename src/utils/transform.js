@@ -1,6 +1,4 @@
 function individualizeEvents(events) {
-    console.log(events);
-
     if (events.length === 0 || !events) {
         return [];
     }
@@ -38,8 +36,6 @@ function individualizeEvents(events) {
             individualizedEvents.push(newEvent);
         });
     });
-
-    console.log(individualizedEvents);
 
     return individualizedEvents;
 }
