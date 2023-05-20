@@ -106,9 +106,12 @@ export default function About(props) {
 					</div>
 					<div className="mt-8 lg:mt-0">
 					<div className="text-base max-w-prose mx-auto lg:max-w-none">
-							<p className="text-lg text-gray-500">
-								{firstParagraph}
-							</p>
+							<div
+								className="text-lg text-gray-500"
+								dangerouslySetInnerHTML={{
+									__html: DOMPurify.sanitize(firstParagraph),
+								}}
+							></div>
 						</div>
 						{profilePicture && <div className="mt-5 relative text-base mx-auto max-w-prose lg:max-w-none block lg:hidden">
 							<figure>
