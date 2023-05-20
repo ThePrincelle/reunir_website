@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import { CameraIcon } from "@heroicons/react/solid";
 
-import { ChevronRightIcon, HomeIcon, DocumentDownloadIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 
 import DOMPurify from "dompurify";
 
-import { getSingleton, downloadAsset } from "../cms";
-
-import { HashLink } from "react-router-hash-link";
+import { getSingleton } from "../cms";
 
 import Events from "../sections/psychamarches/Events";
 import Participate from "../sections/psychamarches/Participate";
@@ -33,10 +31,6 @@ export default function Psychamarche(props) {
 			.catch((err) => console.error(err));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	let downloadForm = () => {
-		downloadAsset(content.form)
-	}
 
 	return (
 		<div className="bg-white overflow-hidden">
@@ -86,45 +80,6 @@ export default function Psychamarche(props) {
 						<h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
 							Psychamarche
 						</h3>
-						{/* <HashLink to="/psychamarche#events">
-							<button
-								type="button"
-								className="inline-flex mr-4  mt-4 ml-0 items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 space-x-1"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-6 w-6 animate-pulse"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-									/>
-								</svg>
-								<span className="text-sm font-medium pr-1">
-									Aller aux évènements
-								</span>
-							</button>
-						</HashLink>
-						<button
-							type="button"
-							onClick={() =>
-								downloadForm()
-							}
-							className="inline-flex mt-4 items-center p-1.5 border border-transparent rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 space-x-1"
-						>
-							<DocumentDownloadIcon
-								className="h-6 w-6"
-								aria-hidden="true"
-							/>
-							<span className="text-sm font-medium pr-1">
-								Télécharger le formulaire d'inscription
-							</span>
-						</button> */}
 					</div>
 				</div>
 				{content && (
