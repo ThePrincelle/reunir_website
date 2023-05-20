@@ -10,7 +10,7 @@ import DOMPurify from "dompurify";
 import { getSingleton } from "../cms";
 
 import Events from "../sections/psychamarches/Events";
-import Participate from "../sections/psychamarches/Participate";
+//import Participate from "../sections/psychamarches/Participate";
 
 const pages = [
 	{ name: "Services", href: "/services", current: false },
@@ -34,7 +34,7 @@ export default function Psychamarche(props) {
 
 	return (
 		<div className="bg-white overflow-hidden">
-			<div className="relative max-w-7xl mx-auto pt-5 py-16 px-4 sm:px-6 lg:px-8">
+			<div className="relative max-w-7xl mx-auto pt-5 px-4 sm:px-6 lg:px-8">
 				<div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
 
 				<nav className="flex" aria-label="Breadcrumb">
@@ -167,7 +167,7 @@ export default function Psychamarche(props) {
 					</div>
 				)}
 			</div>
-			{content && <Participate content={content} />}
+			{/* {content && <Participate content={content} />} */}
 			{content && <Events content={content} />}
 		</div>
 	);

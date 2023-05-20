@@ -18,7 +18,11 @@ import {
   LocationMarkerIcon,
   DocumentDownloadIcon,
 } from "@heroicons/react/outline";
-import { HashtagIcon, StarIcon } from "@heroicons/react/solid";
+import {
+  FolderIcon,
+  HashtagIcon,
+  StarIcon,
+} from "@heroicons/react/solid";
 
 import { handleEvents } from "../utils/transform";
 
@@ -247,6 +251,29 @@ export default function Events(props) {
                         Télécharger le formulaire d'inscription
                       </button>
                     )}
+                    {event.other_docs_description &&
+                      event.other_docs &&
+                      event.other_docs.length > 0 && (
+                        <div className="mt-2 rounded-lg border-2 border-dashed border-blue-800 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-blue-50">
+                          <div className="inline-flex items-center text-blue-800 mb-2">
+                            <FolderIcon className="w-6 h-6 mr-1.5" />
+                            <p className="font-semibold">{event.other_docs_description}</p>
+                          </div>
+                          {event.other_docs.map((doc, idx) => (
+                            <button
+                              type="button"
+                              onClick={(e) => downloadAsset(doc.value.file)}
+                              className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full justify-center"
+                            >
+                              <DocumentDownloadIcon
+                                className="-ml-1 mr-2 h-5 w-5"
+                                aria-hidden="true"
+                              />
+                              {doc.value.description}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                   </div>
                 </div>
                 {!event.special && (
@@ -287,7 +314,8 @@ export default function Events(props) {
                             aria-hidden="true"
                           />
                           <p className="text-sm font-medium text-gray-900">
-                            {seance.humanReadableDate} <br className="sm:hidden"/>à {seance.prettyTime}
+                            {seance.humanReadableDate}{" "}
+                            <br className="sm:hidden" />à {seance.prettyTime}
                           </p>
                           <p className="truncate text-sm text-gray-500">
                             {seance.humanReadableTime}

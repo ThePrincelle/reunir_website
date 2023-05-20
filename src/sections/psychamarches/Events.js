@@ -26,15 +26,15 @@ export default function Events(props) {
 	// }, []);
 
 	return (
-		<div className="py-16 pt-0 mt-16 xl:py-36 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+		<div className="py-16 pt-0 mt-0 xl:py-36 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
 			<div className="max-w-max lg:max-w-7xl mx-auto">
 				<div className="relative z-10 mb-8 md:mb-2 md:px-6">
 					<div className="text-base max-w-prose lg:max-w-none">
-						<h2 className="leading-6 text-green-600 font-semibold tracking-wide uppercase" id="events">
+						{/* <h2 className="leading-6 text-green-600 font-semibold tracking-wide uppercase" id="events">
 							Évènements
-						</h2>
+						</h2> */}
 						<p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-							Planification des séances
+						Évènements
 						</p>
 					</div>
 				</div>
