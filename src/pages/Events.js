@@ -19,7 +19,7 @@ import {
   DocumentDownloadIcon,
 } from "@heroicons/react/outline";
 
-import { HashtagIcon, StarIcon } from "@heroicons/react/solid";
+import { DownloadIcon, HashtagIcon, StarIcon } from "@heroicons/react/solid";
 
 import { handleEvents } from "../utils/transform";
 
@@ -282,7 +282,7 @@ export default function Events(props) {
                               </p>
                             </div>
                             <div className="flex-shrink-0">
-                              <DocumentDownloadIcon
+                              <DownloadIcon
                                 className="h-5 w-5 text-gray-400"
                                 aria-hidden="true"
                               />
