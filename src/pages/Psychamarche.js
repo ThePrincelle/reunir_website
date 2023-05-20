@@ -34,7 +34,7 @@ export default function Psychamarche(props) {
 
 	return (
 		<div className="bg-white overflow-hidden">
-			<div className="relative max-w-7xl mx-auto pt-5 mb-5 px-4 sm:px-6 lg:px-8">
+			<div className="relative max-w-7xl mx-auto pt-5 mb-10 px-4 sm:px-6 lg:px-8">
 				<div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
 
 				<nav className="flex" aria-label="Breadcrumb">
