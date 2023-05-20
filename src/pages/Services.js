@@ -265,7 +265,7 @@ export default function Services(props) {
 														</span>
 													</div>
 												)}
-												<div className="">
+												<div className="mr-4">
 													{service.prix && (
 														<p className="text-sm font-medium text-gray-900">
 															{service.prix}
