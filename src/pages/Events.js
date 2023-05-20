@@ -18,11 +18,8 @@ import {
   LocationMarkerIcon,
   DocumentDownloadIcon,
 } from "@heroicons/react/outline";
-import {
-  FolderIcon,
-  HashtagIcon,
-  StarIcon,
-} from "@heroicons/react/solid";
+
+import { HashtagIcon, StarIcon } from "@heroicons/react/solid";
 
 import { handleEvents } from "../utils/transform";
 
@@ -86,8 +83,6 @@ export default function Events(props) {
           if (a.pinned === false && b.pinned === true) return 1;
           return 0;
         });
-
-        console.log(entries);
 
         setEvents(entries);
 
@@ -251,31 +246,52 @@ export default function Events(props) {
                         Télécharger le formulaire d'inscription
                       </button>
                     )}
-                    {event.other_docs_description &&
-                      event.other_docs &&
-                      event.other_docs.length > 0 && (
-                        <div className="mt-2 rounded-lg border-2 border-dashed border-blue-800 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-blue-50">
-                          <div className="inline-flex items-center text-blue-800 mb-2">
-                            <FolderIcon className="w-6 h-6 mr-1.5" />
-                            <p className="font-semibold">{event.other_docs_description}</p>
-                          </div>
-                          {event.other_docs.map((doc, idx) => (
-                            <button
-                              type="button"
-                              onClick={(e) => downloadAsset(doc.value.file)}
-                              className="inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full justify-center"
-                            >
-                              <DocumentDownloadIcon
-                                className="-ml-1 mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              {doc.value.description}
-                            </button>
-                          ))}
-                        </div>
-                      )}
                   </div>
                 </div>
+                {event.other_docs_description &&
+                  event.other_docs &&
+                  event.other_docs.length > 0 && (
+                    <div>
+                      <div className="relative mx-6 mb-3">
+                        <div
+                          className="absolute inset-0 flex items-center"
+                          aria-hidden="true"
+                        >
+                          <div className="w-full border-t border-gray-300" />
+                        </div>
+                        <div className="relative flex justify-start">
+                          <span className="bg-gray-50 pr-3 text-base font-semibold leading-6 text-gray-900">
+                            {event.other_docs_description}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 mx-6 mb-5">
+                        {event.other_docs.map((doc, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => downloadAsset(doc.value.file)}
+                            className="relative flex items-center space-x-3 rounded-lg border border-blue-300 bg-blue-50 hover:bg-white transition-all px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 hover:border-blue-400"
+                          >
+                            <div className="min-w-0 flex-1">
+                              <span
+                                className="absolute inset-0"
+                                aria-hidden="true"
+                              />
+                              <p className="text-sm font-medium text-gray-900">
+                                {doc.value.description}
+                              </p>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <DocumentDownloadIcon
+                                className="h-5 w-5 text-gray-400"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 {!event.special && (
                   <div className="relative mx-6 mb-3">
                     <div
