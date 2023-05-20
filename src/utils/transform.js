@@ -40,4 +40,99 @@ function individualizeEvents(events) {
     return individualizedEvents;
 }
 
-export { individualizeEvents };
+function handleEvents(events, removePastSeances = false) {
+    if (events.length === 0 || !events) {
+        return [];
+    }
+
+    // Map events
+    let handledEvents = events.map((event) => {
+        event.seances = event.seances.map((seance) => {
+            // For each seance, we format the date and time to be more readable
+            let eventDate = new Date(seance.value.date);
+            let day = eventDate.getDate();
+            let month = eventDate.getMonth() + 1;
+            let year = eventDate.getFullYear();
+
+            // If the seance is in the past, we remove it
+            if (eventDate < new Date() && removePastSeances) {
+                return null;
+            }
+
+            // Human readable date ( mardi 12 octobre 2021 ), year is optional if it's the current year
+            let humanReadableDate = "";
+            if (eventDate.getFullYear() === new Date().getFullYear()) {
+                humanReadableDate = eventDate.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+            } else {
+                humanReadableDate = eventDate.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+            }
+
+            // In x months, x days, x hours, x minutes
+            let timeDifference = eventDate - new Date();
+            let months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
+            let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+
+            let humanReadableTime = "";
+            if (months > 0) {
+                humanReadableTime = `dans ${months} mois`;
+            } else if (days > 0) {
+                humanReadableTime = `dans ${days} jour${days > 1 ? "s" : ""}`;
+            } else if (hours > 0) {
+                humanReadableTime = `dans ${hours} heure${hours > 1 ? "s" : ""}`;
+            } else if (minutes > 0) {
+                humanReadableTime = `dans ${minutes} minute${minutes > 1 ? "s" : ""}`;
+            } else {
+                humanReadableTime = "maintenant";
+            }
+
+            let prettyTime = ""; // 12h00
+            let time = seance.value.time.split(":");
+            let hoursInt = parseInt(time[0]);
+            let minutesInt = parseInt(time[1]);
+            if (hoursInt < 10) {
+                prettyTime += "0";
+            }
+            prettyTime += hoursInt + "h";
+            if (minutesInt < 10) {
+                prettyTime += "0";
+            }
+            prettyTime += minutesInt;
+
+            return {
+                id: event.seances.indexOf(seance),
+                rawDate: seance.value.date,
+                humanReadableDate: humanReadableDate,
+                humanReadableTime: humanReadableTime,
+                date: `${day < 10 ? "0" + day : day}/${month < 10 ? "0" + month : month}/${year}`,
+                time: seance.value.time,
+                prettyTime: prettyTime,
+            };
+        });
+
+        // Remove null seances
+        event.seances = event.seances.filter((seance) => seance !== null);
+
+        // Sort seances by date
+        event.seances.sort((a, b) => {
+            if (a.rawDate < b.rawDate) return -1;
+            if (a.rawDate > b.rawDate) return 1;
+            return 0;
+        });
+
+        // If the event has no seances, we remove it
+        if (event.seances.length === 0) {
+            return null;
+        }
+
+        return event;
+    });
+
+    // Remove null events
+    handledEvents = handledEvents.filter((event) => event !== null);
+
+    return handledEvents;
+}
+
+export { individualizeEvents, handleEvents };
