@@ -252,7 +252,7 @@ export default function Events(props) {
                   event.other_docs &&
                   event.other_docs.length > 0 && (
                     <div>
-                      <div className="relative mx-6 mb-3">
+                      <div className="relative mx-4 sm:mx-6 mb-3">
                         <div
                           className="absolute inset-0 flex items-center"
                           aria-hidden="true"
@@ -265,7 +265,7 @@ export default function Events(props) {
                           </span>
                         </div>
                       </div>
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 mx-6 mb-5">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 mx-4 sm:mx-6 mb-5">
                         {event.other_docs.map((doc, idx) => (
                           <button
                             key={idx}
@@ -293,7 +293,7 @@ export default function Events(props) {
                     </div>
                   )}
                 {!event.special && (
-                  <div className="relative mx-6 mb-3">
+                  <div className="relative mx-4 sm:mx-6 mb-3">
                     <div
                       className="absolute inset-0 flex items-center"
                       aria-hidden="true"
@@ -310,7 +310,7 @@ export default function Events(props) {
                   </div>
                 )}
                 {!event.special && (
-                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 mx-6 mb-5">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 mx-4 sm:mx-6 mb-5">
                     {event.seances.map((seance) => (
                       <div
                         key={seance.id}
