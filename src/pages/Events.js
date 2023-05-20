@@ -66,10 +66,6 @@ export default function Events(props) {
     downloadAsset(event.form);
   };
 
-  let classNames = (...classes) => {
-    return classes.filter(Boolean).join(" ");
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     props.loader(true);
