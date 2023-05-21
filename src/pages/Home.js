@@ -59,7 +59,7 @@ export default function Home(props) {
 								className="inline-flex items-center gap-x-2 rounded-md bg-green-50 py-2.5 px-3.5 text-sm font-semibold text-green-600 shadow-md hover:bg-green-100  transition-all-ease-in-out duration-300 text-center"
 							>
 								<CalendarIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-								Évènements
+								Événements
 							</Link>
 						</div>
 					</div>
