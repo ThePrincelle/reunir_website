@@ -53,7 +53,7 @@ function App() {
 		},
 		{
 			id: "events",
-			name: "Évènements",
+			name: "Événements",
 			path: "/evenements",
 			exact: false,
 			component: Events,
