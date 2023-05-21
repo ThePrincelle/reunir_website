@@ -99,21 +99,21 @@ export default function Events(props) {
           <div className="mx-auto max-w-7xl gap-y-20 gap-x-8 px-6 lg:px-8">
             <div className="mx-auto max-w-7xl lg:mx-0">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Évènements
+                Événements
               </h2>
               <p className="mt-6 text-lg leading-8 text-gray-600 prose prose-yellow">
-                Ré-Unir organise régulièrement des évènements divers et variés.
+                Ré-Unir organise régulièrement des événements divers et variés.
                 <br />
-                Vous pouvez retrouver ici la liste de tous les évènements à
+                Vous pouvez retrouver ici la liste de tous les événements à
                 venir.
                 <br />
                 <br />
-                Pour découvrir plus d'évènements, consultez : <br />
+                Pour découvrir plus d'événements, consultez : <br />
                 <a
                   href="https://www.facebook.com/re.unirpro67/events"
-                  alt="Page Évènements sur Facebook"
+                  alt="Page Événements sur Facebook"
                 >
-                  la page "Évènements" sur le mur Facebook de Ré-Unir
+                  la page "Événements" sur le mur Facebook de Ré-Unir
                 </a>
                 .
               </p>
@@ -357,9 +357,9 @@ export default function Events(props) {
               <br />
               <a
                 href="https://www.facebook.com/re.unirpro67/events"
-                alt="Page Évènements sur Facebook"
+                alt="Page Événements sur Facebook"
               >
-                la page "Évènements" sur le mur Facebook de Ré-Unir
+                la page "Événements" sur le mur Facebook de Ré-Unir
               </a>
               .
             </p>
