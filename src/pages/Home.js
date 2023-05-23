@@ -13,7 +13,7 @@ export default function Home(props) {
 				<div className="absolute inset-0">
 					<img
 						className="w-full h-full object-cover"
-						src="https://source.unsplash.com/random/2500x1200/?nature+forest+psy+day+calm+talk+morning+walk+day&auto=format&fit=crop&w=1920&q=60"
+						src="https://source.unsplash.com/random/2500x1200/?forest+day+walk+sun+sunny+warm&auto=format&fit=crop&w=1920&q=60"
 						alt=""
 					/>
 					<div
