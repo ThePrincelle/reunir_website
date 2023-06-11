@@ -433,11 +433,7 @@ export default function Contact(props) {
 											{horaire.jour}
 										</p>
 										<p className="text-gray-500 ml-auto pr-4">
-											{horaire.ouvert
-												? horaire.debut +
-												  " - " +
-												  horaire.fin
-												: "Fermé"}
+											{horaire.entry}
 										</p>
 									</li>
 								))}
