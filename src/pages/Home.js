@@ -36,7 +36,7 @@ export default function Home(props) {
                             </span>
 						</h1>
 						<p className="mt-6 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-10 md:max-w-3xl font-semibold">
-							Audrey Bauerlé
+						 (<abbr title="Entreprise Individuelle">EI</abbr>) Audrey Bauerlé
 						</p>
                         <p className="mt-2 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-2 md:max-w-3xl">Psychanalyste</p>
 						<div className="mt-8 mb-6 sm:space-x-3 sm:block flex flex-col space-y-2">

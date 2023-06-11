@@ -256,7 +256,7 @@ export default function Contact(props) {
 										Informations de contact
 									</h3>
 									<h4 className="text-md pt-2 text-white">
-										Audrey Bauerlé
+										(<abbr title="Entreprise Individuelle">EI</abbr>) Audrey Bauerlé
 									</h4>
 									<dl className="mt-8 space-y-6">
 										<dt>
