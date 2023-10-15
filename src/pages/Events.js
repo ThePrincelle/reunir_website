@@ -102,7 +102,7 @@ export default function Events(props) {
                 Événements
               </h2>
               <p className="mt-6 text-lg leading-8 text-gray-600 prose prose-yellow">
-                Ré-Unir organise régulièrement des événements divers et variés.
+                En dehors des consultations, j’organise des ateliers dits « de prévention »<br/>ou je participe à des événements solidaires locaux.
                 <br />
                 Vous pouvez retrouver ici la liste de tous les événements à
                 venir.
