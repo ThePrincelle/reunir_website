@@ -32,9 +32,7 @@ export default function Contact(props) {
 	let [urlLinkedin, setLinkedinUrl] = useState("");
 	let [email, setEmail] = useState("");
 	let [phone, setPhone] = useState("");
-	let [cabinet, setCabinet] = useState(null);
-	let [cabinetDetails, setCabinetDetails] = useState(null);
-	let [horaires, setHoraires] = useState([]);
+	let [cabinets, setCabinets] = useState([]);
 
 	let [messageStatus, setMessageStatus] = useState(null);
 
@@ -48,14 +46,12 @@ export default function Contact(props) {
 				setLinkedinUrl(data.linkedin);
 				setPhone(data.telephone);
 				setEmail(data.email);
-				setCabinet(data.bureau);
-				setCabinetDetails(data.bureau_detail);
 				props.loader(false);
 			})
 			.catch((err) => console.error(err));
-		getCollection("horaires")
+		getCollection("cabinets")
 			.then((data) => {
-				setHoraires(data.entries);
+				setCabinets(data.entries.filter((cabinet) => cabinet.published));
 			})
 			.catch((err) => console.error(err));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -302,28 +298,7 @@ export default function Contact(props) {
 												</a>
 											</span>
 										</dd>
-										<dt>
-											<span className="sr-only">
-												Adresse
-											</span>
-										</dt>
-										<dd className="flex text-base text-coolgray-50">
-											<LocationMarkerIcon
-												className="flex-shrink-0 w-6 h-6 text-coolgray-200"
-												aria-hidden="true"
-											/>
-											<span className="ml-3">
-												{cabinet && (
-													<a
-														href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
-														target="_blank" rel="noreferrer"
-														className="hover:text-gray-200 transition-colors"
-													>
-														{cabinet.address}
-													</a>
-												)}
-											</span>
-										</dd>
+										
 									</dl>
 									<ul
 										className="mt-8 flex space-x-12 items-center"
@@ -413,36 +388,46 @@ export default function Contact(props) {
 							id="offices-heading"
 							className="text-3xl font-extrabold text-warm-gray-900"
 						>
-							Cabinet
+							Cabinets
 						</h2>
 						<p className="mt-6 text-lg text-warm-gray-500 max-w-3xl">
-							Vous trouverez ici l'emplacement et les horaires
-							d'ouverture de mon cabinet ainsi que les moyens
-							d'accès à ce dernier.
+							Vous trouverez ici les emplacements et les horaires
+							d'ouverture de mes cabinets ainsi que les moyens
+							d'accès à ces derniers.
 						</p>
-						<div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-max">
+
+						{cabinets.map((cabinet, idx) => (<div key={idx}>
+
+						<h3 className="mt-10 text-2xl font-bold text-warm-gray-900">
+							{cabinet.name}
+						</h3>
+
+						{cabinet.description && <p className="mt-4 mb-6 text-md text-warm-gray-500 max-w-3xl">
+							{cabinet.description}
+						</p>}
+
+						<div className="mt-5 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-max">
 							<ul
 								className="divide-y divide-gray-200"
 							>
-								{horaires.map((horaire) => (
+								{cabinet.horaires.map((horaire, idx) => (
 									<li
-										key={horaire._id}
+										key={idx}
 										className="py-4 flex text-base hover:bg-gray-50 transition-colors"
 									>
 										<p className="font-medium text-gray-900 pl-4">
-											{horaire.jour}
+											{horaire.value.jour}
 										</p>
 										<p className="text-gray-500 ml-auto pr-4">
-											{horaire.entry}
+											{horaire.value.horaires}
 										</p>
 									</li>
 								))}
 							</ul>
-							{cabinet && (
 								<div>
 									<MapContainer
 										style={{ height: "20rem" }}
-										center={[cabinet.lat, cabinet.lng]}
+										center={[cabinet.location.lat, cabinet.location.lng]}
 										zoom={18}
 										scrollWheelZoom={"center"}
 										dragging={false}
@@ -456,13 +441,13 @@ export default function Contact(props) {
 										/>
 										<Marker
 											position={[
-												cabinet.lat,
-												cabinet.lng,
+												cabinet.location.lat,
+												cabinet.location.lng,
 											]}
 										>
 											<Popup>
 												<a
-													href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+													href={`https://maps.google.com/?q=${cabinet.location.lat},${cabinet.location.lng}`}
 													target="_blank" rel="noreferrer"
 												>
 													Google Maps
@@ -477,19 +462,20 @@ export default function Contact(props) {
 										/>
 										<span className="ml-2">
 											<a
-												href={`https://maps.google.com/?q=${cabinet.lat},${cabinet.lng}`}
+												href={`https://maps.google.com/?q=${cabinet.location.lat},${cabinet.location.lng}`}
 												target="_blank" rel="noreferrer"
 												className="hover:text-gray-800 transition-colors"
 											>
 												{cabinet.address}
 											</a>
 											<br />
-											{cabinetDetails}
+											{cabinet.address_details}
 										</span>
 									</figcaption>
 								</div>
-							)}
 						</div>
+
+						</div>))}
 					</div>
 				</section>
 			</main>
