@@ -78,9 +78,9 @@ export default function About(props) {
 								fill="url(#de316486-4a29-4312-bdfc-fbce2132a2c1)"
 							/>
 						</svg>
-						{profilePicture && <div className="relative text-base mx-auto max-w-prose lg:max-w-none hidden lg:block">
+						{profilePicture && <div className="relative text-base ml-44 mx-auto max-w-prose lg:max-w-none hidden md:hidden lg:block">
 							<figure>
-								<div className="aspect-w-12 aspect-h-7 lg:aspect-none">
+								<div className="aspect-w-8 aspect-h-5 lg:aspect-none">
 									<img
 										className="rounded-lg shadow-lg object-cover object-center"
 										src={
@@ -106,38 +106,47 @@ export default function About(props) {
 					</div>
 					<div className="mt-8 lg:mt-0">
 					<div className="text-base max-w-prose mx-auto lg:max-w-none">
-							<div
-								className="text-lg text-gray-500"
-								dangerouslySetInnerHTML={{
-									__html: DOMPurify.sanitize(firstParagraph),
-								}}
-							></div>
+							<div className="flex sm:items-center">
+							{profilePicture && <div className="mt-1 ml-2 relative text-base mx-auto max-w-prose lg:max-w-none hidden lg:hidden md:block sm:mr-5">
+								<figure>
+									<div className="inline-block h-32 w-32">
+										<img
+											className="rounded-full shadow-lg object-cover object-center"
+											src={
+												"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1100&h=1100&o=true&src=" +
+												profilePicture.path
+											}
+											alt={profilePicture && profilePicture.meta.title}
+											width={1100}
+											height={1100}
+										/>
+									</div>
+								</figure>
+								</div>}
+								<div
+									className="text-lg text-gray-500 flex-1"
+									dangerouslySetInnerHTML={{
+										__html: DOMPurify.sanitize(firstParagraph),
+									}}
+								></div>
+								{profilePicture && <div className="mt-1 ml-2 relative text-base mx-auto max-w-prose lg:max-w-none lg:hidden md:hidden sm:block md:hidden">
+								<figure>
+									<div className="inline-block h-auto w-32">
+										<img
+											className="rounded-lg shadow-lg object-cover object-center"
+											src={
+												"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1100&h=1600&o=true&src=" +
+												profilePicture.path
+											}
+											alt={profilePicture && profilePicture.meta.title}
+											width={1100}
+											height={1600}
+										/>
+									</div>
+								</figure>
+								</div>}
+							</div>
 						</div>
-						{profilePicture && <div className="mt-5 relative text-base mx-auto max-w-prose lg:max-w-none block lg:hidden">
-							<figure>
-								<div className="aspect-w-12 aspect-h-13 lg:aspect-none">
-									<img
-										className="rounded-lg shadow-lg object-cover object-center"
-										src={
-											"https://cms.re-unir.fr/api/cockpit/image?token=fbf36043e1aef774506461b27f1cd1&m=thumbmail&w=1184&h=1376&o=true&src=" +
-											profilePicture.path
-										}
-										alt={profilePicture && profilePicture.meta.title}
-										width={1184}
-										height={1376}
-									/>
-								</div>
-								{profilePicture.meta.author !== null && profilePicture.meta.author !== "" && <figcaption className="mt-3 flex text-sm text-gray-500">
-									<CameraIcon
-										className="flex-none w-5 h-5 text-gray-400"
-										aria-hidden="true"
-									/>
-									<span className="ml-2">
-										Photo prise par {profilePicture.meta.author}
-									</span>
-								</figcaption>}
-							</figure>
-						</div>}
 						<div
 							className="mt-6 lg:mt-5 prose prose-indigo text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1"
 							dangerouslySetInnerHTML={{
@@ -145,7 +154,6 @@ export default function About(props) {
 							}}
 						></div>
 					</div>
-					
 				</div>
 				<div className="mt-8 inline-flex rounded-md shadow">
 							<Link
