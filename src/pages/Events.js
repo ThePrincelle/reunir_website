@@ -37,12 +37,12 @@ export default function Events(props) {
       description: "Consultez l'ensemble des services que propose Ré-Unir",
       icon: BookOpenIcon,
     },
-    {
-      name: "Psychamarche",
-      href: "/psychamarche",
-      description: "Découvrez la Psychamarche, une activité innovante !",
-      icon: MapIcon,
-    },
+    // {
+    //   name: "Psychamarche",
+    //   href: "/psychamarche",
+    //   description: "Découvrez la Psychamarche, une activité innovante !",
+    //   icon: MapIcon,
+    // },
     {
       name: "Contact",
       href: "/contact",
