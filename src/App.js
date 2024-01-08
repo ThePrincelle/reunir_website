@@ -44,13 +44,13 @@ function App() {
 			exact: false,
 			component: Services,
 		},
-		{
-			id: "psychamarche",
-			name: "Psychamarche",
-			path: "/psychamarche",
-			exact: false,
-			component: Psychamarche,
-		},
+		// {
+		// 	id: "psychamarche",
+		// 	name: "Psychamarche",
+		// 	path: "/psychamarche",
+		// 	exact: false,
+		// 	component: Psychamarche,
+		// },
 		{
 			id: "events",
 			name: "Événements",
