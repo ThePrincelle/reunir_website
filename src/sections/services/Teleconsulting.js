@@ -3,7 +3,7 @@ import DOMPurify from "dompurify";
 
 import { getSingleton } from "../../cms";
 
-import { CreditCardIcon } from "@heroicons/react/solid";
+// import { CreditCardIcon } from "@heroicons/react/solid";
 
 export default function Teleconsulting(props) {
 	const [title, setTitle] = useState("");
@@ -33,7 +33,7 @@ export default function Teleconsulting(props) {
 						__html: DOMPurify.sanitize(content),
 					}}
 				></p>
-				<div className="mt-8">
+				{/* <div className="mt-8">
 					<div className="inline-flex rounded-md shadow w-2/3 sm:w-1/3 h-16">
 						<button
 							onClick={() => {
@@ -46,7 +46,7 @@ export default function Teleconsulting(props) {
 							<span className="ml-2">Paiement via PayPal</span>
 						</button>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -15,10 +15,10 @@ import Loading from "./components/Loading";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
-import Psychamarche from "./pages/Psychamarche";
+// import Psychamarche from "./pages/Psychamarche";
 import Contact from "./pages/Contact";
 import Legal from "./pages/Legal";
-import Payment from "./pages/Payment";
+// import Payment from "./pages/Payment";
 import Events from "./pages/Events";
 
 function App() {
@@ -65,14 +65,14 @@ function App() {
 			exact: false,
 			component: Contact,
 		},
-		{
-			id: "payment",
-			name: "Paiement",
-			path: "/payment",
-			exact: false,
-			disableMainNav: true,
-			component: Payment,
-		},
+		// {
+		// 	id: "payment",
+		// 	name: "Paiement",
+		// 	path: "/payment",
+		// 	exact: false,
+		// 	disableMainNav: true,
+		// 	component: Payment,
+		// },
 		{
 			id: "legal",
 			name: "Mentions légales",
