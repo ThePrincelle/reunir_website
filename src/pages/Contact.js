@@ -391,9 +391,7 @@ export default function Contact(props) {
 							Cabinets
 						</h2>
 						<p className="mt-6 text-lg text-warm-gray-500 max-w-3xl">
-							Vous trouverez ici les emplacements et les horaires
-							d'ouverture de mes cabinets ainsi que les moyens
-							d'accès à ces derniers.
+							Vous trouverez ici les emplacements et horaires d’ouverture de mes permanences en cabinets ainsi que les moyens d’accès à ces derniers.
 						</p>
 
 						{cabinets.map((cabinet, idx) => (<div key={idx}>
