@@ -102,7 +102,7 @@ export default function Events(props) {
                 Événements
               </h2>
               <p className="mt-6 text-lg leading-8 text-gray-600 prose prose-yellow">
-                En dehors des consultations, j’organise des ateliers dits « de prévention »<br/>ou je participe à des événements solidaires locaux.
+                En dehors des consultations, j’organise des ateliers dits « de prévention santé ».<br/>Je participe également à des actions solidaires locales.
                 <br />
                 Vous pouvez retrouver ici la liste de tous les événements à
                 venir.
